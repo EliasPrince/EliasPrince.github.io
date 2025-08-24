@@ -64,8 +64,8 @@ colors: # this is the basic theme
   border: "#ddd"
   link: "#4a76ee"
   highlight: "#0c0cf2"
-  background: "#ffffff"
-  light_background: "#A4BE5C"
+  background: "#A4BE5C"
+  light_background: "#f3f5fb"
 
 #########################################################################################################
 # Build settings for the site. Editing the below may cause the site to malfunction.
