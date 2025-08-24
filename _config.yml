@@ -32,51 +32,32 @@ resume-url: https://drive.google.com/file/d/13Z3duVzh-gguPU5r03oJVEE6rV9rd3DS/vi
 
 external-links:    # input only your own url slug. The icons with missing entries will not appear.
   linkedin: eliasprince    # https://www.linkedin.com/in/eliasprince
-  github: EliasPrince    # https://github.com/EliasPrince
+  # github: EliasPrince    # https://github.com/EliasPrince
 
 # Skills Section - Add the list of your Skills by categories/tools. The indentation for each level needs to be precise. 
 skills:
-  - category: 3D Modeling
+  - category: Product Development
     tools:
-    - Onshape
-    - Solidworks
-    - Creo
-    - Fusion 360 (Autodesk)
-    - Blender (for complex shapes or animations)
-    - Siemens NX
-    - Inventor (Autodesk)
-    - CATIA (Dassault Systèmes)
-  - category: Prototyping
+    - Bubble
+    - Miro
+    - Airtable
+    - Product Design Specification
+    - Customer Discovery
+  - category: Engineering
     tools:
-    - SLA
-    - CNC
-    - FDM
-    - SLS
-    - DMLS
-    - PolyJet Printing
-    - Vacuum Casting
-    - Laser Cutting
-    - Water Jet Cutting
-    - Arduino / Raspberry Pi
-    - Breadboarding for circuit testing
-  - category: Design Standards / Practices
+    - Finite Element Analysis (FEA)
+    - SolidWorks
+    - SolidWorks Simulation
+    - Nastram
+    - FEMAP
+    - VBA
+    - Arduino
+    - Python
+  - category: Project Management
     tools:
-    - GD&T ASME Y14
-    - ISO fits and tolerances
-    - PLM (PTC Windchill / Arena)   
-  - category: PCB Design
-    tools:
-    - Altium Designer
-    - Altium
-    - Eagle 
-    - KiCad
-  - category: Problem Solving / Risk Management
-    tools:
-    - Root Cause Analysis (e.g., 5 Whys, Fishbone Diagram)
-    - DFMEA / PFMEA 
-    - Six Sigma methodologies
-    - Shain Red-X
-
+    - Project Data Management (PDM)
+    - Jira Agile Project Management
+    - SQL
 
 # Contact Form Setup. Setup an account and copy over the key. When someone fills out the form, it will be received in your email.
 formspree-key:   https://formspree.io/f/{8-digit key}
