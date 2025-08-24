@@ -18,7 +18,7 @@ description: >- # dont remove this line. this will ignore all new lines until th
   Mission driven engineer who is always excited to solve complex problems. Passionate about emerging technologies and leveraging engineering to improve the world around us. Currently focused on marine technology.
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
-profile_image: ./assets/images/profile-image/Elias-Pic.jpg
+profile_image: .assets/images/profile-image/Elias-Pic.jpg
 
 
 # Link your resume
@@ -29,8 +29,8 @@ resume-url: https://drive.google.com/file/d/13Z3duVzh-gguPU5r03oJVEE6rV9rd3DS/vi
 # Set up external links - this will show up as small icons next to your name.
 
 external-links:    # input only your own url slug. The icons with missing entries will not appear.
-  linkedin: elias-prince    # https://www.linkedin.com/in/{elias-prince} 
-  github: EliasPrince    # https://github.com/{EliasPrince}
+  linkedin: eliasprince    # https://www.linkedin.com/in/eliasprince
+  github: EliasPrince    # https://github.com/EliasPrince
 
 # Skills Section - Add the list of your Skills by categories/tools. The indentation for each level needs to be precise. 
 skills:
