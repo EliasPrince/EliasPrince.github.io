@@ -151,7 +151,7 @@ nav .mobile-nav {
     padding: 20px 50px;
     margin: 50px 0;
     display: flex;  /* This makes .hero-section a flex container */
-    background-color: #E8F5E9;
+    background-color: #E0F7FA;
     border: 2px solid var(--border-color);
     border-image: linear-gradient(
         45deg, var(--border-color) 1%, transparent 1%, transparent 99%, var(--border-color) 99%
