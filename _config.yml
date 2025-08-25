@@ -65,6 +65,7 @@ colors: # this is the basic theme
   link: "#4a76ee"
   highlight: "#0c0cf2"
   background: "#ffffff"
+  hero_background: "#A4BE5C"
   light_background: "#f3f5fb"
 
 #########################################################################################################
