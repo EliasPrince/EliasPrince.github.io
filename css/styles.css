@@ -148,7 +148,7 @@ nav .mobile-nav {
 
 /* SECTION 1: Hero */
 .hero-section {
-    padding: 50px 50px;
+    padding: 0 50px;
     margin: 50px 0;
     display: flex;  /* This makes .hero-section a flex container */
 
@@ -165,7 +165,7 @@ nav .mobile-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0;
+    padding: 40px 0;
     gap: 40px;
     border-radius: 8px;
 }
