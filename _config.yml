@@ -22,7 +22,7 @@ profile_image: assets/images/profile-image/EliasPicMed.jpeg
 
 # Link your resume
 # You can place your resume in assets/resume/ or add external link such as pdf saved in google drive 
-resume-url: assets/resume/Elias Prince Eng Resume Spring 25.pdf
+resume-url: /assets/resume/Elias Prince Eng Resume Spring 25.pdf
 
 # Set up external links - this will show up as small icons next to your name.
 
