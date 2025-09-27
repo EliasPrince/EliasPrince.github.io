@@ -1,9 +1,9 @@
 ---
 layout: post
-title: project title
+title: Washdown Power Supply Enclosure
 description:  short description of the project
 skills: 
 - skill 1
 - skill 2
-main-image: _projects/Biomass-V1-Power-Supply-Box/PowerSupplyBox7.jpeg
+main-image: /PowerSupplyBox7.jpeg
 ---
