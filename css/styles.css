@@ -585,19 +585,36 @@ footer p {
     display: flex;
 }
 
-.post-view .title-header  h1 {
+.post-view .summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* centers the image */
+}
+
+.post-view .summary img {
+    max-width: 800px;      /* limits width on large screens */
+    width: 100%;           /* allows image to shrink on smaller screens */
+    max-height: 600px;     /* prevents image from being too tall */
+    height: auto;           /* maintains aspect ratio */
+    border-radius: 6px;
+    margin-bottom: 10px;
+    object-fit: contain;    /* ensures the image fits without cropping */
+}
+
+/*.post-view .title-header  h1 {
     line-height: normal;
     margin-bottom: 10px;
 }
 
 .post-view .summary img {
     width: auto;
-    max-height: 500px;
+    max-height: 1000px;
     height: auto;
+    align-items: center;
     object-fit: cover;
     border-radius: 6px;
     margin-bottom: 10px;
-}
+}*/
 
 .post-view .summary .project-description {
     margin-bottom: 10px;
