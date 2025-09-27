@@ -601,21 +601,6 @@ footer p {
     object-fit: contain;    /* ensures the image fits without cropping */
 }
 
-/*.post-view .title-header  h1 {
-    line-height: normal;
-    margin-bottom: 10px;
-}
-
-.post-view .summary img {
-    width: auto;
-    max-height: 1000px;
-    height: auto;
-    align-items: center;
-    object-fit: cover;
-    border-radius: 6px;
-    margin-bottom: 10px;
-}*/
-
 .post-view .summary .project-description {
     margin-bottom: 10px;
 }
