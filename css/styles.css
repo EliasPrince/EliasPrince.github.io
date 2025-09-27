@@ -591,7 +591,7 @@ footer p {
 }
 
 .post-view .summary img {
-    width: 100%;
+    width: auto;
     height: 500px;
     object-fit: cover;
     border-radius: 6px;
