@@ -580,9 +580,19 @@ footer p {
     padding: 25px 50px;  
 }
 
-.post-view .title-header  {
+.post-view .title-header {
     width: 100%;
     display: flex;
+    flex-direction: column; /* stack title vertically if needed */
+    align-items: center;    /* centers the title horizontally */
+    padding-bottom: 20px;   /* space below the title */
+}
+
+.post-view .title-header h1 {
+    margin: 0;
+    font-size: calc(18px + 2vw); /* slightly larger and responsive */
+    line-height: 1.2;
+    text-align: center; /* ensures the text itself is centered */
 }
 
 .post-view .summary {
