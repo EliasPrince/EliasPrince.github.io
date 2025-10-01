@@ -1,9 +1,10 @@
 ---
 layout: post
-title: project title
+title: U.S. Navy Vessel Strength Analysis
 description:  short description of the project
 skills: 
-- skill 1
-- skill 2
+- FEA Modeling
+- Strength Based Analysis
+- Rule Based FEA Post-Processing
 main-image: /EPF13_2.jpeg 
 ---
