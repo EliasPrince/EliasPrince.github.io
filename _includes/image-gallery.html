@@ -1,7 +1,7 @@
 {% assign image_paths = include.images | split: ", " %}
 {% assign gallery_height = include.height | default: "300" %}
 
-<div class="image-gallery" style="--gallery-height: {{ gallery_height }}px;">
+<div class="image-gallery" style="--gallery-height: {{ gallery_height }}px; display: flex; flex-direction: column; align-items: center; gap: 30px;">
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
       {% if image_name contains 'https://' %}
@@ -9,6 +9,7 @@
               src="{{ image_name }}"
               alt="Web image"
               loading="lazy"
+              style="max-width: 90%; height: var(--gallery-height); border-radius: 12px;"
           />
       {% else %}
           {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
@@ -17,6 +18,7 @@
               alt="{{image_name}}"
               loading="lazy"
               onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
+              style="max-width: 90%; height: var(--gallery-height); border-radius: 12px;"
           />
       {% endif %}
   {% endfor %}
