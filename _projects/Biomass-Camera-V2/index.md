@@ -12,8 +12,8 @@ skills:
 main-image: /BiomassV2_6.jpeg
 ---
 
-{% include image-gallery.html BiomassV2_1.jpeg.jpg" height="400" %}
-{% include image-gallery.html BiomassV2_2.jpeg.jpg" height="400" %}
-{% include image-gallery.html BiomassV2_3.jpeg.jpg" height="400" %}
-{% include image-gallery.html BiomassV2_4.jpeg.jpg" height="400" %}
-{% include image-gallery.html BiomassV2_5.jpeg.jpg" height="400" %}
+{% include image-gallery.html images="BiomassV2_1.jpeg" height="400" %}
+{% include image-gallery.html images="BiomassV2_2.jpeg" height="400" %}
+{% include image-gallery.html images="BiomassV2_3.jpeg" height="400" %}
+{% include image-gallery.html images="BiomassV2_4.jpeg" height="400" %}
+{% include image-gallery.html images="BiomassV2_5.jpeg" height="400" %}
