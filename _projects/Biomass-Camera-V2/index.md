@@ -12,11 +12,8 @@ skills:
 main-image: /BiomassV2_6.jpeg
 ---
 
-<div style="display: flex; flex-direction: column; gap: 20px; margin-top: 20px;">
-  <img src="BiomassV2_1.jpeg" style="width: 100%; border-radius: 8px;">
-  <img src="BiomassV2_2.jpeg" style="width: 100%; border-radius: 8px;">
-  <img src="BiomassV2_3.jpeg" style="width: 100%; border-radius: 8px;">
-  <img src="BiomassV2_4.jpeg" style="width: 100%; border-radius: 8px;">
-  <img src="BiomassV2_5.jpeg" style="width: 100%; border-radius: 8px;">
-</div>
-
+{% include image-gallery.html BiomassV2_1.jpeg.jpg" height="400" %}
+{% include image-gallery.html BiomassV2_2.jpeg.jpg" height="400" %}
+{% include image-gallery.html BiomassV2_3.jpeg.jpg" height="400" %}
+{% include image-gallery.html BiomassV2_4.jpeg.jpg" height="400" %}
+{% include image-gallery.html BiomassV2_5.jpeg.jpg" height="400" %}
