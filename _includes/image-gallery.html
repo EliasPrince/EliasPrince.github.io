@@ -8,7 +8,7 @@
               src="{{ image_name }}"
               alt="Web image"
               loading="lazy"
-              style="max-width: 600px; width: 100%; height: auto; margin: 0 auto;"
+              style="max-width: 90%; height: auto;"
           />
       {% else %}
           {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
@@ -17,7 +17,7 @@
               alt="{{image_name}}"
               loading="lazy"
               onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
-              style="max-width: 600px; width: 100%; height: auto; margin: 0 auto;"
+              style="max-width: 90%; height: auto;"
           />
       {% endif %}
   {% endfor %}
