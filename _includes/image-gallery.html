@@ -16,6 +16,9 @@
               src="{{ page_url_without_index }}{{ image_name }}" 
               alt="{{image_name}}"
               loading="lazy"
+              decoding="async"
+              style="opacity: 0; transition: opacity 0.3s;"
+              onload="this.style.opacity='1';"
               onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
           />
       {% endif %}
