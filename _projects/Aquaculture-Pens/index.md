@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Offshore Aquaculture Net Pens
-description:  Development of open-ocean aquaculture net pen systems designed to support fish stocks exceeding 100,000, enabling large-scale, sustainable seafood production.
+description: Development of open-ocean aquaculture net pen systems designed to support fish stocks exceeding 100,000, enabling large-scale, sustainable seafood production.
 skills: 
 - Mechanical Design
 - Structural Analysis
