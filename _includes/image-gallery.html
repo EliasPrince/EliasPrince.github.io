@@ -1,6 +1,37 @@
 {% assign image_paths = include.images | split: ", " %}
 {% assign gallery_height = include.height | default: "300" %}
 
+<div class="image-gallery" style="--gallery-height: {{ gallery_height }}px;">
+  {% for image_path in image_paths %}
+      {% assign image_name = image_path | strip %}
+      {% if image_name contains 'https://' %}
+          <div class="image-wrapper">
+            <img 
+                class="gallery-image"
+                src="{{ image_name }}"
+                alt="Web image"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                decoding="async"
+                onload="this.classList.add('loaded')"
+            />
+          </div>
+      {% else %}
+          {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
+          <div class="image-wrapper">
+            <img 
+                class="gallery-image"
+                src="{{ page_url_without_index }}{{ image_name }}" 
+                alt="{{image_name}}"
+                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+                decoding="async"
+                onload="this.classList.add('loaded')"
+                onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
+            />
+          </div>
+      {% endif %}
+  {% endfor %}
+</div>
+
 <style>
 .image-gallery {
     display: flex;
@@ -21,12 +52,13 @@
     background: #f0f0f0;
     border-radius: 4px;
     overflow: hidden;
+    min-height: var(--gallery-height);
 }
 
 .gallery-image {
     max-width: 100%;
     height: auto;
-    max-height: v-bind(gallery_height);
+    max-height: var(--gallery-height);
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
     display: block;
@@ -36,63 +68,3 @@
     opacity: 1;
 }
 </style>
-
-<div class="image-gallery">
-  {% for image_path in image_paths %}
-      {% assign image_name = image_path | strip %}
-      {% if image_name contains 'https://' %}
-          <div class="image-wrapper" style="min-height: {{ gallery_height }}px;">
-            <img 
-                class="gallery-image"
-                src="{{ image_name }}"
-                alt="Web image"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                decoding="async"
-                fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-                onload="this.classList.add('loaded')"
-            />
-          </div>
-      {% else %}
-          {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
-          <div class="image-wrapper" style="min-height: {{ gallery_height }}px;">
-            <img 
-                class="gallery-image"
-                src="{{ page_url_without_index }}{{ image_name }}" 
-                alt="{{image_name}}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                decoding="async"
-                fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-                onload="this.classList.add('loaded')"
-                onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
-            />
-          </div>
-      {% endif %}
-  {% endfor %}
-</div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const options = {
-        root: null,
-        rootMargin: '50px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                const img = entry.target;
-                if (img.dataset.src) {
-                    img.src = img.dataset.src;
-                    delete img.dataset.src;
-                }
-                observer.unobserve(img);
-            }
-        });
-    }, options);
-
-    document.querySelectorAll('.gallery-image[loading="lazy"]').forEach(img => {
-        observer.observe(img);
-    });
-});
-</script>
