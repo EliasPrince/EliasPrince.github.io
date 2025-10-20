@@ -1,7 +1,49 @@
 {% assign image_paths = include.images | split: ", " %}
 {% assign gallery_height = include.height | default: "300" %}
 
-<div class="image-gallery" style="--gallery-height: {{ gallery_height }}px;">
+<style>
+.image-gallery {
+    --image-height: {{ gallery_height }}px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    padding: 10px;
+    margin: 0 auto;
+}
+
+.image-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 800px;
+    background: #f0f0f0;
+    border-radius: 4px;
+    overflow: hidden;
+    min-height: var(--image-height);
+    margin: 0 auto;
+}
+
+.gallery-image {
+    max-width: 100%;
+    max-height: var(--image-height);
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
+    display: block;
+    margin: 0 auto;
+    object-fit: contain;
+}
+
+.gallery-image.loaded {
+    opacity: 1;
+}
+</style>
+
+<div class="image-gallery">
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
       {% if image_name contains 'https://' %}
@@ -31,40 +73,4 @@
       {% endif %}
   {% endfor %}
 </div>
-
-<style>
-.image-gallery {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    padding: 10px;
-}
-
-.image-wrapper {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    max-width: 800px;
-    background: #f0f0f0;
-    border-radius: 4px;
-    overflow: hidden;
-    min-height: var(--gallery-height);
-}
-
-.gallery-image {
-    max-width: 100%;
-    height: auto;
-    max-height: var(--gallery-height);
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    display: block;
-}
-
-.gallery-image.loaded {
-    opacity: 1;
-}
 </style>

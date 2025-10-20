@@ -11,7 +11,14 @@ layout: wrapper
        
         {% assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" %}
         {% assign image_path = "/" | append: folder_path | append: page['main-image'] %}       
-        <img src="{{ image_path }}" alt="{{ page.title }} image">
+        <img 
+            src="{{ image_path }}" 
+            alt="{{ page.title }} image"
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            style="display: block; margin: 0 auto; max-width: 100%; height: auto;"
+        >
         
         <div class="project-description">
             <h2>Project Overview</h2>
