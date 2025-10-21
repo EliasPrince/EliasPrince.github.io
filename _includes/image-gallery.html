@@ -3,43 +3,17 @@
 
 <style>
 .image-gallery {
-    --image-height: {{ gallery_height }}px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-    padding: 10px;
-    margin: 0 auto;
-}
-
-.image-wrapper {
-    position: relative;
+    --gallery-height: {{ gallery_height }}px;
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    max-width: 800px;
-    background: #f0f0f0;
-    border-radius: 4px;
-    overflow: hidden;
-    min-height: var(--image-height);
-    margin: 0 auto;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.gallery-image {
-    max-width: 100%;
-    max-height: var(--image-height);
-    height: auto;
-    opacity: 0;
-    transition: opacity 0.5s ease-in-out;
-    display: block;
-    margin: 0 auto;
-    object-fit: contain;
-}
-
-.gallery-image.loaded {
-    opacity: 1;
+.gallery-img {
+    max-height: var(--gallery-height);
+    width: auto;
 }
 </style>
 
@@ -47,29 +21,25 @@
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
       {% if image_name contains 'https://' %}
-          <div class="image-wrapper">
-            <img 
-                class="gallery-image"
-                src="{{ image_name }}"
-                alt="Web image"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                decoding="async"
-                onload="this.classList.add('loaded')"
-            />
-          </div>
+          <img 
+              class="gallery-img"
+              src="{{ image_name }}"
+              alt="Web image"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              decoding="async"
+              fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+          />
       {% else %}
           {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
-          <div class="image-wrapper">
-            <img 
-                class="gallery-image"
-                src="{{ page_url_without_index }}{{ image_name }}" 
-                alt="{{image_name}}"
-                loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-                decoding="async"
-                onload="this.classList.add('loaded')"
-                onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
-            />
-          </div>
+          <img 
+              class="gallery-img"
+              src="{{ page_url_without_index }}{{ image_name }}" 
+              alt="{{image_name}}"
+              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
+              decoding="async"
+              fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+              onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
+          />
       {% endif %}
   {% endfor %}
 </div>
