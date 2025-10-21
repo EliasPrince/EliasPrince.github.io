@@ -1,46 +1,34 @@
 {% assign image_paths = include.images | split: ", " %}
 {% assign gallery_height = include.height | default: "300" %}
 
-<style>
-.image-gallery {
-    --gallery-height: {{ gallery_height }}px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.gallery-img {
-    max-height: var(--gallery-height);
-    width: auto;
-}
-</style>
-
-<div class="image-gallery">
+<div class="image-container" style="text-align: center;">
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
+      <div style="margin-bottom: 20px;">
       {% if image_name contains 'https://' %}
           <img 
-              class="gallery-img"
               src="{{ image_name }}"
               alt="Web image"
               loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
               decoding="async"
               fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+              height="{{ gallery_height }}"
+              style="margin: 0 auto; display: block;"
           />
       {% else %}
           {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
           <img 
-              class="gallery-img"
               src="{{ page_url_without_index }}{{ image_name }}" 
               alt="{{image_name}}"
               loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
               decoding="async"
               fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
+              height="{{ gallery_height }}"
+              style="margin: 0 auto; display: block;"
               onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
           />
       {% endif %}
+      </div>
   {% endfor %}
 </div>
 </style>
