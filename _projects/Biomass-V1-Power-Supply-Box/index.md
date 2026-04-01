@@ -5,10 +5,10 @@ description:  An IP68-rated edge computing enclosure designed to extend the BMC 
 skills:
 - Enclosure Design
 - Electronics Packaging
-- IP68 Sealing
+- Waterproofing & Sealing
 - Thermal Management
-- DFM
-- Edge Computing Integration
+- Design for Manufacturing
+- Embedded Systems
 - Field Deployment
 main-image: /PowerSupplyBox7.jpeg
 ---
