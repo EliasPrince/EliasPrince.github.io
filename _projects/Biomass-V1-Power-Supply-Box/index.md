@@ -6,10 +6,8 @@ skills:
 - Enclosure Design
 - Electronics Packaging
 - Waterproofing & Sealing
-- Thermal Management
-- Design for Manufacturing
+- Rapid Prototyping
 - Embedded Systems
-- Field Deployment
 main-image: /PowerSupplyBox7.jpeg
 ---
 

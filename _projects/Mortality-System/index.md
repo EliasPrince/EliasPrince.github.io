@@ -5,14 +5,9 @@ description: A subsea mechanical system designed to automate the removal of dece
 skills: 
 - Mechanical Design
 - Structural Analysis
-- Hydrostatic & Hydrodynamic Analysis
-- Design for Manufacturing (DFM) & Assembly (DFA)
-- Manufacturing Support & Quality Control
-- Rapid Prototyping
-- Deployment Planning
-- Operational Design
-- Systems Integration
-- Field Operations Support
+- Design for Manufacturing
+- Field Deployment & Commissioning
+- Customer-Driven Iteration
 main-image: /Mortality7.jpeg
 ---
 

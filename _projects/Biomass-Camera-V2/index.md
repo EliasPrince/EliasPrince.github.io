@@ -5,9 +5,8 @@ description:  The BMC V2 is an ML-powered subsea camera system that helps aquacu
 skills:
 - Mechanical Design
 - Electronics Packaging
-- Thermal Analysis
-- Rapid Prototyping
-- Field Testing
+- Thermal Management
+- Pressure Vessel Design
 - Project Management
 main-image: /BiomassV2_6.jpeg
 ---

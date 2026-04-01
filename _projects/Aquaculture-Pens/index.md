@@ -6,12 +6,8 @@ skills:
 - Mechanical Design
 - Structural Analysis
 - Hydrostatic & Hydrodynamic Analysis
-- Design for Manufacturing (DFM) & Assembly (DFA)
-- Manufacturing Support & Quality Control
-- Deployment Planning
-- Operational Design
+- Design for Manufacturing
 - Systems Integration
-- Lifecycle Engineering
 main-image: /SeaProtean1.jpeg
 ---
 
