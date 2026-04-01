@@ -150,14 +150,9 @@ nav .mobile-nav {
 .hero-section {
     padding: 20px 50px;
     margin: 50px 0;
-    display: flex;  /* This makes .hero-section a flex container */
-    background-color: #B2EBF2;
-    border: 2px solid var(--border-color);
-    border-image: linear-gradient(
-        45deg, var(--border-color) 1%, transparent 1%, transparent 99%, var(--border-color) 99%
-        ) 
-        1;
-    
+    display: flex;
+    background-color: var(--light-background-color);
+    border-radius: 12px;
 }
 
 .hero-section .group {
@@ -234,8 +229,8 @@ nav .mobile-nav {
 
 /* NAVIGATION ARROW */
 .arrow{
-    margin-top: 125px;
-    margin-bottom: 300px;
+    margin-top: 40px;
+    margin-bottom: 60px;
     display: flex;
     justify-content: center;  
 }
