@@ -299,39 +299,6 @@ nav .mobile-nav {
     filter: grayscale(0.3) contrast(1.05);
 }
 
-/* NAVIGATION ARROW */
-.arrow{
-    margin-top: 40px;
-    margin-bottom: 60px;
-    display: flex;
-    justify-content: center;
-}
-
-.arrow a {
-    font-family: 'IBM Plex Mono', monospace;
-    font-size: 12px;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    color: var(--text-color);
-    display: inline-block;
-    align-items: center;
-    border: 1px solid var(--text-color);
-    border-radius: 0;
-    padding: 10px 20px;
-    text-align: center;
-}
-
-.arrow a > * {
-    display: block;
-    margin: 0 auto;
-}
-
-.arrow a:hover {
-    color: var(--link-color);
-    border-color: var(--link-color);
-}
-
-
 /*SECTION 2: PROJECT GRID */
 .project-grid-section {
     margin-bottom: 0;
@@ -1016,10 +983,6 @@ footer p {
     .hero-section .group .text h2 .external-links i {
         font-size: 18px;
         margin: 0
-    }
-
-    .arrow {
-        display: none;
     }
 
     .project-grid-section .grid-container {
