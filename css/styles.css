@@ -110,7 +110,7 @@ nav .right a:last-child
 nav .right a:last-child:hover,
 nav .right a span:last-child:hover,
 nav .mobile-nav a:last-child:hover,
-nav .mobile-nav a span:last-child:hover,{
+nav .mobile-nav a span:last-child:hover {
     color: var(--text-color);
     background-color: var(--light-background-color);
     border-radius: 10px;
@@ -346,12 +346,8 @@ nav .mobile-nav {
 .project-card .project-title {
     font-size: 1.4em;
     text-decoration: none;
-    transition: color 0.3s ease; 
+    transition: color 0.3s ease;
     margin-bottom: 10px
-}
-
-.project-card .project-title:hover {
-    text-decoration: underline;
 }
 
 
@@ -393,10 +389,6 @@ nav .mobile-nav {
     text-align: start;
 }
 
-.project-card .read-more:hover {
-    text-decoration: underline;
-}
-
 
 
 /* SECTION 3: SKILLS */
@@ -420,7 +412,11 @@ nav .mobile-nav {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 15px;
-    align-items: start;
+    align-items: stretch;
+   }
+
+.skills-section .skill-categories > li {
+    display: flex;
    }
 
 .skills-section .skill-categories .skills-card  span{
@@ -428,17 +424,15 @@ nav .mobile-nav {
 }
 
 .skills-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
     padding: 15px;
     border-radius: var(--card-radius);
     border: var(--card-border);
     box-shadow: var(--card-shadow);
     background-color: var(--background-color);
     transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.skills-section .skill-categories .skills-card:hover {
-    box-shadow: var(--card-shadow-hover);
-    border-color: var(--link-color);
 }
 
 .skills-section .skill-categories .category-label {
@@ -448,9 +442,11 @@ nav .mobile-nav {
 }
 
 .skills-section .skill-categories .skills-list {
-    display: flex; 
+    display: flex;
     flex-wrap: wrap;
-    padding-left: 0; 
+    align-content: flex-start;
+    flex: 1;
+    padding-left: 0;
     margin-right: 10px;
     gap: 8px;
     }
@@ -603,7 +599,7 @@ footer .license {
     gap: 0;  /* Changed from 10px to 0 */
 }
 
-footer span, p {
+footer span, footer p {
     word-wrap: break-word;
     overflow-wrap: break-word;
     white-space: normal;
@@ -721,7 +717,7 @@ footer p {
     color: var(--highlight-color);
   }
 
-.post-view .content ul, ol {
+.post-view .content ul, .post-view .content ol {
     padding-left: 20px;
     margin: 1em 0;
   }
