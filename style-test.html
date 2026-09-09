@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Style Test — Elias Prince</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+
+  :root {
+    --paper:      #eeeae0;
+    --paper-2:    #e4dfd2;
+    --ink:        #23231f;
+    --ink-dim:    #6b675c;
+    --line:       #c9c3b3;
+    --accent:     #46647d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 32px 100px;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--ink); }
+
+  /* ---------- NAV ---------- */
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  nav .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 1px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.02em;
+  }
+
+  nav .links {
+    display: flex;
+    gap: 4px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  nav .links a {
+    color: var(--ink);
+    padding: 6px 14px;
+  }
+
+  nav .links a:hover { color: var(--accent); }
+
+  nav .links a.cta {
+    border: 1px solid var(--ink);
+    color: var(--ink);
+    margin-left: 14px;
+  }
+
+  nav .links a.cta:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+    padding: 60px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .hero .text { flex: 6; }
+
+  .hero h1 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 46px;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+
+  .hero .role {
+    font-size: 16px;
+    color: var(--ink-dim);
+    margin-bottom: 22px;
+  }
+
+  .hero p.desc {
+    max-width: 560px;
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink);
+    margin-bottom: 28px;
+  }
+
+  .hero .links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border: 1px solid var(--ink);
+    padding: 9px 16px;
+    margin-right: 10px;
+    color: var(--ink);
+  }
+
+  .hero .links a:first-child {
+    background: var(--ink);
+    color: var(--paper);
+    border-color: var(--ink);
+  }
+
+  .hero .links a:first-child:hover { background: var(--accent); border-color: var(--accent); }
+  .hero .links a:not(:first-child):hover { border-color: var(--accent); color: var(--accent); }
+
+  .arrow-icon {
+    display: inline-flex;
+  }
+
+  .hero .frame {
+    flex: 4;
+    aspect-ratio: 1/1;
+    border: 1px solid var(--ink);
+    overflow: hidden;
+  }
+
+  .hero .frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(0.3) contrast(1.05);
+  }
+
+  /* ---------- SECTION LABEL ---------- */
+  section { padding: 60px 0; border-bottom: 1px solid var(--line); }
+  section:last-of-type { border-bottom: none; }
+
+  section h2 {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 22px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  section h2::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--accent);
+  }
+
+  #contact h2 { justify-content: center; }
+
+  /* ---------- SKILLS ---------- */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .skills-card {
+    background: var(--paper);
+    padding: 20px;
+  }
+
+  .skills-card .cat {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .skills-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .skill-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.03em;
+    padding: 4px 8px;
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+
+  /* ---------- PROJECT CARD ---------- */
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+    gap: 24px;
+  }
+
+  .project-card {
+    border: 1px solid var(--line);
+    background: var(--paper);
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.15s ease;
+  }
+
+  .project-card:hover { border-color: var(--ink); }
+
+  .project-card img {
+    width: 100%;
+    aspect-ratio: 16/9;
+    object-fit: cover;
+    display: block;
+    filter: grayscale(0.25) contrast(1.05);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .project-card .body { padding: 18px 16px; }
+
+  .project-card .title {
+    font-family: 'IBM Plex Mono', monospace;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .project-card .desc {
+    font-size: 13.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .project-card .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  /* ---------- CONTACT ---------- */
+  #contact { text-align: center; }
+
+  .contact {
+    max-width: 480px;
+    margin: 0 auto;
+    text-align: left;
+  }
+
+  .contact form {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--line);
+    padding: 24px;
+  }
+
+  .contact label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+    margin-top: 14px;
+    margin-bottom: 6px;
+  }
+
+  .contact label:first-child { margin-top: 0; }
+
+  .contact input, .contact textarea {
+    font-family: 'Inter', sans-serif;
+    background: var(--paper-2);
+    border: 1px solid var(--line);
+    padding: 9px 10px;
+    font-size: 14px;
+    color: var(--ink);
+    outline: none;
+  }
+
+  .contact input:focus, .contact textarea:focus { border-color: var(--accent); }
+
+  .contact button {
+    margin-top: 20px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--paper);
+    border: 1px solid var(--ink);
+    padding: 12px;
+    cursor: pointer;
+  }
+
+  .contact button:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ---------- FOOTER ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding-top: 40px;
+    text-align: center;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.04em;
+  }
+
+  footer a { color: var(--ink-dim); }
+  footer a:hover { color: var(--accent); }
+
+  /* ---------- NOTE BANNER (test page only) ---------- */
+  .test-banner {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    padding: 10px 16px;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+</style>
+</head>
+<body>
+
+<div class="test-banner">STYLE TEST — not linked from the live site — real content, new visual language only</div>
+
+<nav>
+  <div class="logo">EP</div>
+  <div class="links">
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#contact" class="cta">Contact</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="text">
+    <h1>Elias Prince</h1>
+    <div class="role">Mechanical Engineer, NYC</div>
+    <p class="desc">
+      Mission driven engineer who is always excited to solve complex problems.
+      Passionate about emerging technologies and leveraging engineering to
+      improve the world around us.
+    </p>
+    <div class="links">
+      <a href="#projects">View Projects</a>
+      <a href="https://www.linkedin.com/in/eliasprince" target="_blank">LinkedIn <span class="arrow-icon">↗</span></a>
+    </div>
+  </div>
+  <div class="frame">
+    <img src="assets/images/profile-image/EliasPic.jpeg" alt="Elias Prince">
+  </div>
+</div>
+
+<section id="projects">
+  <h2>Projects</h2>
+  <div class="project-grid">
+
+    <div class="project-card">
+      <img src="_projects/Aquaculture-Pens/SeaProtean1.jpeg" alt="Offshore Aquaculture Net Pens">
+      <div class="body">
+        <div class="title">Offshore Aquaculture Net Pens</div>
+        <div class="desc">
+          Development of open-ocean aquaculture net pen systems designed to
+          support fish stocks exceeding 100,000, enabling large-scale,
+          sustainable seafood production.
+        </div>
+        <div class="tags">
+          <span class="skill-tag">Mechanical Design</span>
+          <span class="skill-tag">Structural Analysis</span>
+          <span class="skill-tag">Hydrodynamic Analysis</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <img src="_projects/Biomass-Camera-V2/BiomassV2_6.jpeg" alt="Underwater Biomass Estimation Camera">
+      <div class="body">
+        <div class="title">Underwater Biomass Estimation Camera</div>
+        <div class="desc">
+          ML-powered subsea camera system that helps aquaculture farm
+          operators estimate fish biomass in real time, reducing feed costs
+          and improving harvest planning. Launched to production in 2026 at
+          $2.5M ARR.
+        </div>
+        <div class="tags">
+          <span class="skill-tag">Electronics Packaging</span>
+          <span class="skill-tag">Thermal Management</span>
+          <span class="skill-tag">Pressure Vessel Design</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="skills">
+  <h2>Skills</h2>
+  <div class="skills-grid">
+    <div class="skills-card">
+      <div class="cat">Product Development</div>
+      <div class="tags">
+        <span class="skill-tag">Bubble</span>
+        <span class="skill-tag">Miro</span>
+        <span class="skill-tag">Airtable</span>
+        <span class="skill-tag">Product Design Spec</span>
+        <span class="skill-tag">Customer Discovery</span>
+      </div>
+    </div>
+    <div class="skills-card">
+      <div class="cat">Engineering</div>
+      <div class="tags">
+        <span class="skill-tag">FEA</span>
+        <span class="skill-tag">SolidWorks</span>
+        <span class="skill-tag">SolidWorks Sim</span>
+        <span class="skill-tag">Nastran</span>
+        <span class="skill-tag">FEMAP</span>
+        <span class="skill-tag">VBA</span>
+        <span class="skill-tag">Arduino</span>
+        <span class="skill-tag">Python</span>
+      </div>
+    </div>
+    <div class="skills-card">
+      <div class="cat">Project Management</div>
+      <div class="tags">
+        <span class="skill-tag">PDM</span>
+        <span class="skill-tag">Jira</span>
+        <span class="skill-tag">SQL</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <h2>Contact</h2>
+  <div class="contact">
+    <form onsubmit="return false;">
+      <label>Name</label>
+      <input type="text" placeholder="Your name">
+      <label>Email</label>
+      <input type="email" placeholder="you@example.com">
+      <label>Message</label>
+      <textarea rows="4" placeholder="Say hello"></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div>
+    <a href="https://www.linkedin.com/in/eliasprince" target="_blank">LinkedIn</a>
+  </div>
+  <div style="margin-top:10px;">© 2026 Elias Prince — style test build</div>
+</footer>
+
+</body>
+</html>

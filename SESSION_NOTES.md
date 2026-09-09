@@ -1,3 +1,34 @@
+# Session Notes — 2026-09-09
+
+Handoff from a visual-design session, picked up right after the 2026-09-08 cleanup pass below. **No production files changed** — this session was scoped entirely to nailing down a new visual direction before porting it. Read this before picking up the port.
+
+## What happened this session
+
+User shared a screenshot of an internal dev-tool/agent-runtime UI they liked (monospace labels, muted palette, technical schematic feel) and asked for thoughts on the direction for this portfolio. After discussion, scope was narrowed to *just the visual language* — type, color, borders — not the literal graph/interactive-panel UI from the reference.
+
+Iterated live in a new standalone file, **`style-test.html`** at the repo root (self-contained HTML/CSS, real site content, excluded from the Jekyll build via `_config.yml`'s `exclude:` list). To preview it: `python3 -m http.server 8934` from the repo root, then open `http://localhost:8934/style-test.html` (opening via `file://` also works in a normal browser — only the Chrome automation extension used during this session couldn't navigate to `file://` directly).
+
+### Design decisions locked in (don't re-litigate without reason)
+
+- **Palette pared to 3 colors**: warm paper background (`#eeeae0`), dark ink text (`#23231f`), one muted slate-blue accent (`#46647d`). No multi-color tier coding like the reference image had.
+- **Type**: IBM Plex Mono (Google Fonts) for headings/nav/labels/tags, uppercase + letter-spaced for labels; Inter for body copy.
+- **Sharp corners, hairline borders** instead of shadows/rounded cards — same box language reused across the photo frame, project cards, skill tags, and the contact form.
+- **No background texture** — a grid-paper background was tried and explicitly rejected ("too much"). Flat paper color only.
+- **Hero layout matches the original site's architecture**: text left, photo right, horizontal — not centered/stacked (a centered-stack version was tried and rejected; user asked to go back to the original arrangement, just with a bigger square/bordered photo instead of circular).
+- **No status bar** — the reference image's "STATUS / ROLE / BASE / FOCUS" strip was cut as an unneeded feature, not core info.
+- **Nav mark is a small bordered "EP" monogram**, not the spelled-out name — spelling it out read as redundant against the hero heading.
+- **Wider content column**: max-width 1280px with 32px side padding, not the original's larger margins.
+- **Section headings** (Projects/Skills/Contact) each get a small accent-colored square marker before the text, to give the accent color a deliberate presence beyond hover states.
+- User's stated general principle: default to the simpler version at every step, cut anything that isn't core info. Several rounds of this session were "tone it down further" — trust that instinct during the port too, rather than re-adding chrome.
+
+### Next session: port this into production
+
+The plan (confirmed with user) is to port `style-test.html`'s CSS into the real site — `css/styles.css` and the `colors:` block in `_config.yml` — applied across the actual layouts (`_layouts/`, `_includes/`), **not** a wholesale copy-paste. Important constraint: `style-test.html` has **zero responsive rules** (it's a desktop-width mockup only). `css/styles.css` already has real breakpoints at 1200px/768px/600px (see its bottom third) — the new type/color/border language needs to be threaded into those existing breakpoints, not bypass them.
+
+Read `style-test.html` fresh when starting the port rather than trusting this summary for exact values — it may have had further small tweaks.
+
+---
+
 # Session Notes — 2026-09-08
 
 Handoff notes from a portfolio cleanup/prep session ahead of job applications. Read this before picking up more work.

@@ -102,6 +102,7 @@ include:
 exclude:
   - CLAUDE.md
   - SESSION_NOTES.md
+  - style-test.html
   - Gemfile
   - Gemfile.lock
   - vendor/
