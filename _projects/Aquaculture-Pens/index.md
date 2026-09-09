@@ -13,7 +13,7 @@ main-image: /SeaProtean1.jpeg
 
 {% include image-gallery.html images="SeaProtean2.jpeg" height="400" %}
 <br>
-{% include image-gallery.html images="SeaStation1.jpeg" height="400" %}
+{% include image-gallery.html images="SeaStation1.png" height="400" %}
 <br>
 {% include image-gallery.html images="SeaStation2.jpeg" height="400" %}
 <br>
