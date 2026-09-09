@@ -55,12 +55,13 @@ formspree-key:   https://formspree.io/f/mldwragk
 
 # Active theme (Update this to switch themes). Make sure to keep the indentation the same.
 colors: # this is the basic theme
-  text: "#212528"
-  border: "#d7dde3"
-  link: "#2f6690"
-  highlight: "#1c4a66"
-  background: "#fbfcfd"
-  light_background: "#e8eef3"
+  text: "#23231f"
+  dim_text: "#6b675c"
+  border: "#c9c3b3"
+  link: "#46647d"
+  highlight: "#23231f"
+  background: "#eeeae0"
+  light_background: "#e4dfd2"
 
 #########################################################################################################
 # Build settings for the site. Editing the below may cause the site to malfunction.

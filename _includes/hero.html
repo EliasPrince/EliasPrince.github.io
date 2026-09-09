@@ -4,7 +4,7 @@
     <div class="group">
         <div class="text">
             <h2>
-                I'm {{ site.name | split: ' ' | first }} 
+                {{ site.name }}
                 {% if site.external-links %}
                 <span class="external-links">
                     {% assign platforms = "linkedin,x-twitter,github,stackoverflow,discord,medium,threads,bluesky,instagram,youtube" | split: "," %}
@@ -72,17 +72,13 @@
             <p> {{site.description}}</p>
             <div class="links">
                 <a href="#projects">
-                    <i class="fa-solid fa-pen"></i>
-                    <span>Projects</span>
+                    <span>View Projects</span>
                 </a>
-                <a href="#skills">
-                    <i class="fa-solid fa-hammer"></i>
-                    <span>Skills</span>
+                {% if site.external-links.linkedin %}
+                <a href="https://www.linkedin.com/in/{{ site.external-links.linkedin }}/" target="_blank">
+                    <span>LinkedIn <span class="arrow-icon">&#8599;</span></span>
                 </a>
-                <a href="#contact">
-                    <i class="fa-solid fa-envelope"></i>
-                    <span>Contact Me</span>
-                </a>
+                {% endif %}
             </div>
             
         </div>

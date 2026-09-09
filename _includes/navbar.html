@@ -1,8 +1,9 @@
 <!-- _includes/nav.html -->
 <nav>
-    <div class="left">
-        <a href="/">{{site.name}}</a>
-    </div>
+    {% assign name_parts = site.name | split: ' ' %}
+    {% assign first_letter = name_parts | first | slice: 0, 1 %}
+    {% assign last_letter = name_parts | last | slice: 0, 1 %}
+    <a href="/" class="logo">{{ first_letter | append: last_letter }}</a>
 
     <!-- Desktop Menu -->
     <div class="right desktop-nav">
