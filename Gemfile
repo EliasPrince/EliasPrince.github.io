@@ -18,6 +18,14 @@ group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.12"
 end
 
+# Ruby 3.4+ removed these from the default gems; github-pages' old Jekyll
+# still needs them. Harmless no-ops on older Ruby, required on newer.
+gem "csv"
+gem "base64"
+gem "logger"
+gem "bigdecimal"
+gem "webrick"
+
 # Windows and JRuby does not include zoneinfo files, so bundle the tzinfo-data gem
 # and associated library.
 platforms :mingw, :x64_mingw, :mswin, :jruby do

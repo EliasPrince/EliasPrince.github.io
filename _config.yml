@@ -59,7 +59,7 @@ formspree-key:   https://formspree.io/f/mldwragk
 
 # Active theme (Update this to switch themes). Make sure to keep the indentation the same.
 colors: # this is the basic theme
-  text: "##1a1c20"
+  text: "#1a1c20"
   border: "#ddd"
   link: "#4a76ee"
   highlight: "#0c0cf2"
