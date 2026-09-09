@@ -125,32 +125,14 @@ nav .menu-toggle {
     padding: 10px;
 }
 
-nav .hamburger {
-    display: block;
-    width: 24px;
-    height: 2px;  /* Changed from 5px to 2px */
-    background: var(--text-color);
-    position: relative;
-    transition: background 0.2s;
+nav .menu-toggle i {
+    color: var(--text-color);
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
-nav .hamburger::before,
-nav .hamburger::after {
-    content: '';
-    position: absolute;
-    left: 0;  /* Added to ensure proper alignment */
-    width: 24px;  /* Made consistent with parent width */
-    height: 2px;
-    background: var(--text-color);
-    transition: transform 0.2s;
-}
-
-nav .hamburger::before {
-    top: -8px;  /* Adjusted spacing */
-}
-
-nav .hamburger::after {
-    bottom: -8px;  /* Adjusted spacing */
+nav .menu-toggle.active i {
+    color: var(--link-color);
+    transform: rotate(90deg);
 }
 
 nav .mobile-nav {
@@ -183,13 +165,27 @@ nav .mobile-nav {
 }
 
 .hero-section .text h2 {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
     font-size: 50px;
 }
 
+.hero-section .text .external-links {
+    display: inline-flex;
+    align-items: center;
+}
+
 .hero-section .text .external-links i {
-    font-size: 20px;
+    font-size: 22px;
     padding: 0 5px;
-    color: var(--text-color);
+    color: var(--link-color);
+    transition: color 0.2s ease;
+}
+
+.hero-section .text .external-links a:hover i {
+    color: var(--highlight-color);
 }
 
 .hero-section .text h3 {
@@ -421,6 +417,10 @@ nav .mobile-nav {
 .skills-section .skill-categories {
     list-style: none;
     padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    align-items: start;
    }
 
 .skills-section .skill-categories .skills-card  span{
@@ -434,10 +434,6 @@ nav .mobile-nav {
     box-shadow: var(--card-shadow);
     background-color: var(--background-color);
     transition: box-shadow 0.25s ease, border-color 0.25s ease;
-}
-
-.skills-section .skill-categories .skills-card {
-    margin-bottom: 15px;
 }
 
 .skills-section .skill-categories .skills-card:hover {
@@ -877,33 +873,16 @@ footer p {
         min-height: 50px; 
     }
 
-    .menu-toggle.active .hamburger {
-        background: transparent;
-    }
 
-    .menu-toggle.active .hamburger::before {
-        transform: rotate(45deg);
-        top: 0;
-    }
 
-    .menu-toggle.active .hamburger::after {
-        transform: rotate(-45deg);
-        bottom: 0;
-    } 
-    
-  
-
-    
-      
     /*SECTION 1: Hero */
     .hero-section .group .text h2 {
-        flex-direction: column-reverse;
-        display: flex;
-        font-size: 40px;   
+        justify-content: center;
+        font-size: 40px;
       }
-    
+
     .hero-section .group .text h2 .external-links i {
-        font-size: 16px; /* Example: reducing icon size */
+        font-size: 18px;
         margin: 0
     }
 
