@@ -305,12 +305,21 @@ nav .mobile-nav {
 .project-grid-section h2::before,
 .skills-section h2::before,
 .contact-section h2::before,
+.about-section h2::before,
 .post-view .summary h2::before {
     content: '';
     width: 8px;
     height: 8px;
     background: var(--link-color);
     flex-shrink: 0;
+}
+
+.about-section h2 {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 30px;
 }
 
 .post-view .summary h2 {
@@ -413,14 +422,13 @@ nav .mobile-nav {
 .project-card .project-description {
     display: -webkit-box;
     -webkit-line-clamp: 4;
-    line-clamp: 4px;
+    line-clamp: 4;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
     word-break: break-word;
     line-height: 1.6;
     font-size: 13.5px;
-    max-height: calc(1.6em * 4);
     padding: 12px 16px 0;
 }
 
@@ -438,13 +446,47 @@ nav .mobile-nav {
     text-align: start;
 }
 
+.section-cta {
+    display: inline-block;
+    align-self: flex-start;
+    margin-top: 30px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--text-color);
+    border: 1px solid var(--text-color);
+    padding: 9px 16px;
+    transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+}
+
+.section-cta:hover {
+    color: var(--background-color);
+    background-color: var(--text-color);
+}
+
+
+
+/* SECTION: ABOUT */
+.about-section {
+    padding: 60px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.about-section .about-content {
+    max-width: 720px;
+}
+
+.about-section .about-content p {
+    margin-bottom: 0;
+}
+
 
 
 /* SECTION 3: SKILLS */
 .skills-section {
     margin-bottom: 0;
     padding: 60px 0;
-    border-bottom: 1px solid var(--border-color);
     display:flex;
     flex-direction: column;
 }
@@ -531,19 +573,20 @@ nav .mobile-nav {
 
 /* SECTION 4: CONTACT */
 .contact-section {
-    padding: 60px 25px;
-    max-width: 560px;
-    margin: 0 auto;
-    margin-bottom: 0;
+    padding: 60px 0;
 }
 
 .contact-section h2 {
     font-size: 22px;
     display: flex;
     align-items: center;
-    justify-content: center;
     gap: 10px;
     margin-bottom: 30px;
+}
+
+.contact-section .group {
+    max-width: 560px;
+    margin: 0 auto;
 }
 
 .contact-section .group form {

@@ -1,9 +1,15 @@
-<!-- SECTION 3: project -->
+<!-- SECTION: project -->
+{% if include.featured_only %}
+  {% assign project_list = site.projects | where: "featured", true %}
+{% else %}
+  {% assign project_list = site.projects %}
+{% endif %}
+
 <section id="projects" class="project-grid-section">
-    <h2>Projects</h2>
+    <h2>{{ include.heading | default: "Projects" }}</h2>
 
     <div class="grid-container">
-        {% for item in site.projects %}
+        {% for item in project_list %}
     <a href="{{ item.url }}" class="project-link">
         <div class="project-card">
             {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
@@ -11,16 +17,20 @@
             <img src="{{ image_path }}" alt="{{ item.title }} image">
             <h3 class="project-title">{{ item.title }}</h3>
             <div class="project-skills">
-                {% for skill in item.skills %}
+                {% assign top_skills = item.skills | slice: 0, 3 %}
+                {% for skill in top_skills %}
                     <span class="skill">{{ skill }}</span>
                 {% endfor %}
             </div>
-            <p class="project-description">{{ item.description }}</p>
-            <button class="read-more">Read more →</button>
+            <p class="project-description">{{ item.tagline | default: item.description }}</p>
+            <button class="read-more">Read more &rarr;</button>
         </div>
     </a>
 {% endfor %}
     </div>
 
+    {% if include.show_view_all %}
+    <a href="/projects/" class="section-cta">View All Projects &rarr;</a>
+    {% endif %}
 
  </section>
