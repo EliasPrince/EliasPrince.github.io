@@ -1,21 +1,23 @@
-<!-- _includes/nav.html -->
+<!-- _includes/navbar.html -->
+{% assign name_parts = site.name | split: ' ' %}
+{% assign first_letter = name_parts | first | slice: 0, 1 %}
+{% assign last_letter = name_parts | last | slice: 0, 1 %}
+
+{% comment %} Current-page state: which top-level section does this URL belong to? {% endcomment %}
+{% assign nav_current = "" %}
+{% if page.url == "/" %}{% assign nav_current = "home" %}
+{% elsif page.url contains "/about" %}{% assign nav_current = "about" %}
+{% elsif page.url contains "/projects" %}{% assign nav_current = "projects" %}
+{% endif %}
+
 <nav>
-    {% assign name_parts = site.name | split: ' ' %}
-    {% assign first_letter = name_parts | first | slice: 0, 1 %}
-    {% assign last_letter = name_parts | last | slice: 0, 1 %}
-    <a href="/" class="logo">{{ first_letter | append: last_letter }}</a>
+    <a href="/" class="logo" aria-label="{{ site.name }} — home">{{ first_letter | append: last_letter }}</a>
 
     <!-- Desktop Menu -->
     <div class="right desktop-nav">
-        <a href="/">
-            <span>Home</span>
-        </a>
-        <a href="/about/">
-            <span>About</span>
-        </a>
-        <a href="/projects/">
-            <span>Projects</span>
-        </a>
+        <a href="/" {% if nav_current == "home" %}aria-current="page"{% endif %}><span>Home</span></a>
+        <a href="/about/" {% if nav_current == "about" %}aria-current="page"{% endif %}><span>About</span></a>
+        <a href="/projects/" {% if nav_current == "projects" %}aria-current="page"{% endif %}><span>Projects</span></a>
     </div>
 
     <!-- Mobile Menu Button -->
@@ -25,14 +27,8 @@
 
     <!-- Mobile Menu -->
     <div class="mobile-nav">
-        <a href="/">
-            <span>Home</span>
-        </a>
-        <a href="/about/">
-            <span>About</span>
-        </a>
-        <a href="/projects/">
-            <span>Projects</span>
-        </a>
+        <a href="/" {% if nav_current == "home" %}aria-current="page"{% endif %}><span>Home</span></a>
+        <a href="/about/" {% if nav_current == "about" %}aria-current="page"{% endif %}><span>About</span></a>
+        <a href="/projects/" {% if nav_current == "projects" %}aria-current="page"{% endif %}><span>Projects</span></a>
     </div>
 </nav>

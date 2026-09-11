@@ -1,0 +1,10 @@
+{% comment %}
+  Captioned image for project pages. Usage inside a project's markdown:
+    {% include figure.html src="BiomassV2_1.jpeg" caption="Optical alignment rig." %}
+  `src` is relative to the project's folder. Add width="half" to size it for a two-up pair.
+{% endcomment %}
+{% assign fig_folder = page.path | split: "/" | slice: 0, 2 | join: "/" %}
+<figure class="fig{% if include.width %} fig-{{ include.width }}{% endif %}">
+    <img src="/{{ fig_folder }}/{{ include.src }}" alt="{{ include.alt | default: include.caption | default: page.title }}" loading="lazy" decoding="async">
+    {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>

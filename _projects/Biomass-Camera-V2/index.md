@@ -1,5 +1,12 @@
 ---
 layout: post
+permalink: /projects/Biomass-Camera-V2/
+redirect_from: /projects/Biomass-Camera-V2/index/
+lead: true
+year: 2026
+role: Mechanical Lead
+team: 20+ cross-functional
+summary: ML-powered subsea camera that gives farm operators real-time fish biomass, cutting feed cost and improving harvest planning. I owned electronics packaging, thermal management for continuous subsea operation, and the optical tolerance stacks.
 title: Underwater Biomass Estimation Camera
 tagline: ML-powered subsea camera for real-time biomass estimation, shipped at $2.5M ARR.
 description:  The BMC V2 is an ML-powered subsea camera system that helps aquaculture farm operators estimate fish biomass in real time, reducing feed costs and improving harvest planning. As mechanical lead on a 20+ person cross-functional team, I owned the electronics packaging architecture, thermal management for continuous subsea operation, sub-millimeter tolerance stack-ups for the optical components, and all design analysis, product testing, and validation. The system launched to production in 2026 at $2.5M ARR.

@@ -1,18 +1,18 @@
 <footer>
     <div class="footer-content">
-        <div class="links">
-            <a href="/">
-                <span>Home</span>
-            </a>
-            <a href="/about/">
-                <span>About</span>
-            </a>
-            <a href="/projects/">
-                <span>Projects</span>
-            </a>
+        <div class="contact">
+            <span class="label">Get in touch</span>
+            {% if site.external-links.linkedin %}
+            <a class="big" href="https://www.linkedin.com/in/{{ site.external-links.linkedin }}/" target="_blank" rel="noopener">LinkedIn &#8599;</a>
+            {% endif %}
         </div>
-    </div>
-    <div class="license">
-        <p>© 2026 Elias Prince</p>
+        <div class="meta">
+            <div class="links">
+                <a href="/"><span>Home</span></a>
+                <a href="/about/"><span>About</span></a>
+                <a href="/projects/"><span>Projects</span></a>
+            </div>
+            <p class="license">&copy; {{ site.time | date: "%Y" }} {{ site.name }}</p>
+        </div>
     </div>
 </footer>

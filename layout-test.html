@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Layout Test — Elias Prince</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+  /* Same palette/type as production css/styles.css. Standalone mockup — not built by Jekyll. */
+  :root {
+    --paper:   #eeeae0;
+    --paper-2: #e4dfd2;
+    --ink:     #23231f;
+    --dim:     #6b675c;
+    --line:    #c9c3b3;
+    --accent:  #46647d;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { color: var(--ink); }
+
+  .mono {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  h1, h2, h3 { font-family: 'IBM Plex Mono', monospace; font-weight: 600; line-height: 1.2; }
+
+  /* Section heading with accent square — unchanged from production */
+  .sec-h {
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 28px;
+  }
+  .sec-h::before { content: ''; width: 8px; height: 8px; background: var(--accent); flex-shrink: 0; }
+  .sec-h .count { font-weight: 400; color: var(--dim); font-size: 14px; margin-left: 6px; }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.05em; text-transform: uppercase;
+    padding: 9px 16px; border: 1px solid var(--ink); color: var(--ink);
+    transition: color .15s, background-color .15s, border-color .15s;
+  }
+  .btn:hover { background: var(--ink); color: var(--paper); }
+  .btn.solid { background: var(--ink); color: var(--paper); }
+  .btn.solid:hover { background: var(--accent); border-color: var(--accent); }
+
+  /* ---------- MOCKUP CHROME (not part of the design) ---------- */
+  .screen-label {
+    background: var(--ink); color: var(--paper);
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+    padding: 12px 32px; margin: 80px 0 0;
+  }
+  .screen-label:first-child { margin-top: 0; }
+  .screen-label span { color: #a9b7c4; margin-left: 16px; text-transform: none; letter-spacing: 0.02em; }
+  .note {
+    max-width: 1280px; margin: 0 auto; padding: 14px 32px 0;
+    font-size: 13px; color: var(--dim);
+  }
+  .note code { font-family: 'IBM Plex Mono', monospace; font-size: 12px; }
+  .ph { color: var(--dim); }  /* placeholder values for new front-matter fields */
+
+  /* ---------- PAGE FRAME ---------- */
+  .page { max-width: 1280px; margin: 0 auto; padding: 0 32px 60px; }
+
+  /* ---------- NAV (with current-page state) ---------- */
+  nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px 0; border-bottom: 1px solid var(--line);
+  }
+  nav .logo {
+    display: flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border: 1px solid var(--ink);
+    font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 14px; color: var(--ink);
+  }
+  nav .right { display: flex; align-items: center; gap: 4px; }
+  nav .right a { color: var(--ink); padding: 6px 14px; position: relative; }
+  nav .right a:hover { color: var(--accent); }
+  nav .right a[aria-current="page"]::after {
+    content: ''; position: absolute; left: 14px; right: 14px; bottom: 2px; height: 1px; background: var(--ink);
+  }
+  nav .right a.cta { border: 1px solid var(--ink); padding: 9px 16px; margin-left: 10px; }
+  nav .right a.cta:hover { background: var(--ink); color: var(--paper); }
+  nav .right a.cta[aria-current="page"]::after { display: none; }
+  nav .right a.cta[aria-current="page"] { background: var(--ink); color: var(--paper); }
+
+  /* ---------- HERO (compressed) ---------- */
+  .hero {
+    display: grid; grid-template-columns: 6fr 4fr; gap: 60px; align-items: center;
+    padding: 56px 0; border-bottom: 1px solid var(--line);
+  }
+  .hero h1 { font-size: 44px; margin-bottom: 8px; }
+  .hero .role { color: var(--dim); font-size: 16px; margin-bottom: 20px; }
+  .hero p { max-width: 600px; margin-bottom: 26px; }
+  .hero .links { display: flex; gap: 10px; flex-wrap: wrap; }
+  .hero img {
+    width: 100%; aspect-ratio: 1/1; object-fit: cover; display: block;   /* identical to the current production hero */
+    border: 1px solid var(--ink); filter: grayscale(0.3) contrast(1.05);
+  }
+
+  /* ---------- LEAD PROJECT (Home) ---------- */
+  .lead {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: stretch;
+    border: 1px solid var(--line); margin-bottom: 24px;
+    transition: border-color .15s;
+  }
+  .lead:hover { border-color: var(--ink); }
+  .lead .text { padding: 32px 0 32px 32px; display: flex; flex-direction: column; }
+  .lead .eyebrow { color: var(--dim); margin-bottom: 18px; }
+  .lead h3 { font-size: 26px; margin-bottom: 14px; color: var(--ink); }
+  .lead .meta { display: flex; flex-wrap: wrap; gap: 8px 24px; color: var(--dim); margin-bottom: 18px; }
+  .lead .meta b { color: var(--ink); font-weight: 500; }
+  .lead p { color: var(--ink); max-width: 520px; margin-bottom: 24px; }
+  .lead .more { margin-top: auto; color: var(--accent); }
+  .lead .more:hover { color: var(--ink); }
+  .lead .img {
+    border-left: 1px solid var(--line); background: var(--paper-2);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .lead .img img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(0.2) contrast(1.05); max-height: 480px; }
+
+  /* ---------- PROJECT INDEX (rows) ---------- */
+  .index { border-top: 1px solid var(--line); }
+  .index .row {
+    display: grid;
+    grid-template-columns: 168px 72px 1fr 220px 24px;
+    gap: 24px; align-items: center;
+    padding: 16px 0; border-bottom: 1px solid var(--line);
+    color: var(--ink);
+    transition: background-color .15s;
+  }
+  .index .row:hover { background: var(--paper-2); }
+  .index .row.head { padding: 8px 0; color: var(--dim); }
+  .index .row.head:hover { background: transparent; }
+  .index .thumb {
+    width: 168px; height: 118px; object-fit: cover; display: block;
+    border: 1px solid var(--line); filter: grayscale(0.25) contrast(1.05);
+    margin-left: 0;
+  }
+  .index .year { color: var(--dim); }
+  .index .title { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px; }
+  .index .tag { color: var(--dim); font-size: 13.5px; line-height: 1.5; margin-top: 2px; }
+  .index .role { color: var(--dim); font-size: 12px; line-height: 1.6; }
+  .index .role b { color: var(--ink); font-weight: 500; display: block; }
+  .index .arrow { color: var(--accent); }
+  .index .row:hover .arrow { color: var(--ink); }
+  .index .row:hover .title { color: var(--accent); }
+
+  /* compact variant for the two supporting rows on Home */
+  .index.compact .row { grid-template-columns: 128px 1fr 220px 24px; }
+  .index.compact .thumb { width: 128px; height: 90px; }
+
+  .section { padding: 56px 0; border-bottom: 1px solid var(--line); }
+  .section .cta { margin-top: 28px; }
+
+  .cform { max-width: 560px; margin: 0 auto; display: flex; flex-direction: column; border: 1px solid var(--line); padding: 24px; }
+  .cform label { color: var(--dim); font-size: 11px; margin: 14px 0 6px; }
+  .cform label:first-child { margin-top: 0; }
+  .cform input, .cform textarea { font-family: 'Inter', sans-serif; font-size: 14px; padding: 9px 10px; background: var(--paper-2); border: 1px solid var(--line); color: var(--ink); outline: none; resize: none; }
+  .cform button { margin-top: 20px; justify-content: center; height: 44px; }
+
+  /* ---------- FOOTER as contact block ---------- */
+  footer {
+    padding: 40px 0 0; display: flex; justify-content: space-between; align-items: flex-end; gap: 40px;
+    color: var(--dim);
+  }
+  footer .contact .label { color: var(--dim); margin-bottom: 8px; }
+  footer .contact a.big { font-family: 'IBM Plex Mono', monospace; font-size: 18px; color: var(--ink); }
+  footer .contact a.big:hover { color: var(--accent); }
+  footer .contact .links { margin-top: 8px; display: flex; gap: 18px; }
+  footer .contact .links a { color: var(--dim); }
+  footer .contact .links a:hover { color: var(--accent); }
+  footer .meta { text-align: right; font-size: 11px; }
+  footer .meta .navlinks { display: flex; gap: 20px; justify-content: flex-end; margin-bottom: 10px; }
+  footer .meta .navlinks a { color: var(--dim); }
+  footer .meta .navlinks a:hover { color: var(--accent); }
+
+  /* ---------- CASE STUDY ---------- */
+  .case { max-width: 880px; margin: 0 auto; padding: 40px 0 0; }
+  .case .back { color: var(--dim); display: inline-block; margin-bottom: 22px; }
+  .case .back:hover { color: var(--accent); }
+  .case h1 { font-size: 36px; margin-bottom: 10px; }
+  .case .tagline { font-size: 18px; color: var(--dim); margin-bottom: 28px; max-width: 700px; line-height: 1.5; }
+
+  .meta-strip {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    border: 1px solid var(--line); margin-bottom: 36px;
+  }
+  .meta-strip > div { padding: 14px 16px; border-right: 1px solid var(--line); }
+  .meta-strip > div:last-child { border-right: none; }
+  .meta-strip .k { color: var(--dim); font-size: 11px; margin-bottom: 4px; }
+  .meta-strip .v { font-family: 'IBM Plex Mono', monospace; font-size: 14px; font-weight: 500; }
+
+  figure { margin: 0 0 36px; }
+  figure img { display: block; width: 100%; height: auto; }
+  figure.hero-fig img { max-height: 560px; width: auto; max-width: 100%; margin: 0 auto; }
+  figcaption {
+    font-family: 'IBM Plex Mono', monospace; font-size: 12px; color: var(--dim);
+    padding-top: 8px; line-height: 1.5; text-align: left;
+  }
+  figcaption .n { color: var(--accent); margin-right: 8px; }
+
+  .case h2 { font-size: 18px; margin: 32px 0 12px; display: flex; align-items: center; gap: 10px; }
+  .case h2::before { content: ''; width: 8px; height: 8px; background: var(--accent); flex-shrink: 0; }
+  .case p { margin-bottom: 1em; max-width: 720px; }
+  .case ul { margin: 0 0 1em 20px; max-width: 720px; }
+
+  .fig-grid { column-count: 2; column-gap: 24px; margin: 24px 0 8px; }   /* masonry, no crop — same as production gallery */
+  .fig-grid figure { margin: 0 0 24px; break-inside: avoid; }
+  .fig-grid img { border: 0; }
+
+  .skills { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0 40px; }
+  .skills span {
+    font-family: 'IBM Plex Mono', monospace; font-size: 11px; letter-spacing: 0.03em;
+    padding: 4px 8px; border: 1px solid var(--line);
+  }
+
+  .pn {
+    display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid var(--line); margin-top: 24px;
+  }
+  .pn a { padding: 22px 0; color: var(--ink); display: block; }
+  .pn a:hover .t { color: var(--accent); }
+  .pn a + a { text-align: right; border-left: 1px solid var(--line); }
+  .pn .k { color: var(--dim); font-size: 11px; margin-bottom: 4px; }
+  .pn .t { font-family: 'IBM Plex Mono', monospace; font-weight: 600; font-size: 15px; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero img { width: 300px; max-width: 100%; }
+    .lead { grid-template-columns: 1fr; }
+    .lead .img { border-left: none; border-top: 1px solid var(--line); }
+    .index .row, .index.compact .row { grid-template-columns: 104px 1fr 24px; }
+    .index .thumb, .index.compact .thumb { width: 104px; height: 74px; }
+    .index .year, .index .role { display: none; }
+    .index .row.head { display: none; }
+    .meta-strip { grid-template-columns: 1fr 1fr; }
+    .meta-strip > div:nth-child(2) { border-right: none; }
+    .meta-strip > div:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+    .fig-grid { column-count: 1; }
+    footer { flex-direction: column; align-items: flex-start; }
+    footer .meta { text-align: left; }
+    footer .meta .navlinks { justify-content: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============================================================ -->
+<div class="screen-label">Screen A <span>Home — compressed hero, one lead project, two supporting rows, contact form stays, LinkedIn in the footer</span></div>
+<div class="note">Grey bracketed values (year, org, role, team) are placeholders for new front-matter fields. Nothing here is built by Jekyll — it's a static reference like <code>style-test.html</code>.</div>
+
+<div class="page">
+  <nav>
+    <a href="#" class="logo">EP</a>
+    <div class="right mono">
+      <a href="#" aria-current="page">Home</a>
+      <a href="#">About</a>
+      <a href="#" class="cta">Projects</a>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <div>
+      <h1>Elias Prince</h1>
+      <div class="role">Mechanical Engineer, NYC</div>
+      <p>I'm a mechanical engineer who likes building physical things for hard environments. Most of my work has been in aquaculture hardware, with earlier years in structural analysis for ships. I enjoy small teams, messy problems, and getting to the point where something real is in the water.</p>
+      <div class="links">
+        <a href="#" class="btn solid">View Projects</a>
+        <a href="#" class="btn">LinkedIn ↗</a>
+      </div>
+    </div>
+    <img src="assets/images/profile-image/EliasPic.jpeg" alt="Elias Prince">
+  </section>
+
+  <section class="section">
+    <h2 class="sec-h">Selected Work</h2>
+
+    <a href="#" class="lead">
+      <div class="text">
+        <div class="eyebrow mono">01 / Featured</div>
+        <h3>Underwater Biomass Estimation Camera</h3>
+        <div class="meta mono">
+          <span>Role <b>Mechanical Lead</b></span>
+          <span>Team <b>20+</b></span>
+          <span>Shipped <b>2026</b></span>
+          <span>Org <b class="ph">[Company]</b></span>
+        </div>
+        <p>ML-powered subsea camera that gives farm operators real-time fish biomass, cutting feed cost and improving harvest planning. Owned electronics packaging, thermal management for continuous subsea operation, and sub-millimeter optical tolerance stacks.</p>
+        <span class="more mono">Read more →</span>
+      </div>
+      <div class="img">
+        <img src="_projects/Biomass-Camera-V2/BiomassV2_6.jpeg" alt="Underwater Biomass Estimation Camera">
+      </div>
+    </a>
+
+    <div class="index compact">
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Aquaculture-Pens/SeaProtean1.jpeg" alt="">
+        <div>
+          <div class="title">Offshore Aquaculture Net Pens</div>
+          <div class="tag">Open-ocean net pens engineered to support fish stocks exceeding 100,000.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Mechanical Engineer]</b><span class="ph">[Company] · [2023–24]</span></div>
+        <div class="arrow">→</div>
+      </a>
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Mortality-System/Mortality7.jpeg" alt="">
+        <div>
+          <div class="title">Net Pen Mortality Extraction System</div>
+          <div class="tag">Subsea system automating mortality removal from open-ocean net pens.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Mechanical Engineer]</b><span class="ph">[Company] · [2023]</span></div>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+
+    <a href="#" class="btn cta">All projects (5) →</a>
+  </section>
+
+  <section class="section" style="border-bottom:none">
+    <h2 class="sec-h">Contact</h2>
+    <form class="cform" onsubmit="return false">
+      <label class="mono">Name</label><input type="text">
+      <label class="mono">Email</label><input type="email">
+      <label class="mono">Message</label><textarea rows="5"></textarea>
+      <button class="btn solid" type="button">Send Message</button>
+    </form>
+  </section>
+
+  <footer>
+    <div class="contact">
+      <div class="label mono">Get in touch</div>
+      <a class="big" href="#">LinkedIn ↗</a>
+    </div>
+    <div class="meta mono">
+      <div class="navlinks"><a href="#">Home</a><a href="#">About</a><a href="#">Projects</a></div>
+      <div>© 2026 Elias Prince</div>
+    </div>
+  </footer>
+</div>
+
+<!-- ============================================================ -->
+<div class="screen-label">Screen B <span>/projects/ — index instead of cards. All five projects in one screen; scales to 15.</span></div>
+<div class="note">Thumbnails are cropped to a fixed 168×118 box; the full image is one click away. Sort is by year descending once the field exists. Header row is optional.</div>
+
+<div class="page">
+  <nav>
+    <a href="#" class="logo">EP</a>
+    <div class="right mono">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#" class="cta" aria-current="page">Projects</a>
+    </div>
+  </nav>
+
+  <section class="section" style="border-bottom:none">
+    <h2 class="sec-h">Projects <span class="count">05</span></h2>
+
+    <div class="index">
+      <div class="row head mono">
+        <div></div><div class="year">Year</div><div>Project</div><div class="role">Role</div><div></div>
+      </div>
+
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Biomass-Camera-V2/BiomassV2_6.jpeg" alt="">
+        <div class="year mono">2026</div>
+        <div>
+          <div class="title">Underwater Biomass Estimation Camera</div>
+          <div class="tag">ML-powered subsea camera for real-time biomass estimation, shipped at $2.5M ARR.</div>
+        </div>
+        <div class="role mono"><b>Mechanical Lead</b><span class="ph">[Company] · 20+ person team</span></div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Biomass-V1-Power-Supply-Box/PowerSupplyBox7.jpeg" alt="">
+        <div class="year mono ph">[2025]</div>
+        <div>
+          <div class="title">Washdown Power Supply Enclosure</div>
+          <div class="tag">IP68 edge-compute enclosure extending the BMC camera to remote farm sites.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Mechanical Engineer]</b><span class="ph">[Company]</span></div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Mortality-System/Mortality7.jpeg" alt="">
+        <div class="year mono ph">[2024]</div>
+        <div>
+          <div class="title">Net Pen Mortality Extraction System</div>
+          <div class="tag">Subsea system automating mortality removal from open-ocean net pens.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Mechanical Engineer]</b><span class="ph">[Company]</span></div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/Aquaculture-Pens/SeaProtean1.jpeg" alt="">
+        <div class="year mono ph">[2023]</div>
+        <div>
+          <div class="title">Offshore Aquaculture Net Pens</div>
+          <div class="tag">Open-ocean net pens engineered to support fish stocks exceeding 100,000.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Mechanical Engineer]</b><span class="ph">[Company]</span></div>
+        <div class="arrow">→</div>
+      </a>
+
+      <a href="#" class="row">
+        <img class="thumb" src="_projects/EPF13/EPF13_2.png" alt="" style="object-fit:contain;background:#fff">
+        <div class="year mono ph">[2021]</div>
+        <div>
+          <div class="title">U.S. Navy Vessel Strength Analysis</div>
+          <div class="tag">Structural FEA for U.S. Navy and commercial vessels using Nastran and FEMAP.</div>
+        </div>
+        <div class="role mono"><b class="ph">[Structural Analyst]</b><span class="ph">[Company]</span></div>
+        <div class="arrow">→</div>
+      </a>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================================ -->
+<div class="screen-label">Screen C <span>Project page — no outer frame, meta strip, ~250 words in three short sections, captioned photos, next/prev</span></div>
+<div class="note">Copy below is assembled only from your existing description text, trimmed to the 200–500 word target. Captions are placeholders.</div>
+
+<div class="page">
+  <nav>
+    <a href="#" class="logo">EP</a>
+    <div class="right mono">
+      <a href="#">Home</a>
+      <a href="#">About</a>
+      <a href="#" class="cta" aria-current="page">Projects</a>
+    </div>
+  </nav>
+
+  <article class="case">
+    <a href="#" class="back mono">← All projects</a>
+    <h1>Underwater Biomass Estimation Camera</h1>
+    <p class="tagline">ML-powered subsea camera that gives aquaculture operators real-time fish biomass.</p>
+
+    <div class="meta-strip">
+      <div><div class="k mono">Role</div><div class="v">Mechanical Lead</div></div>
+      <div><div class="k mono">Org</div><div class="v ph">[Company]</div></div>
+      <div><div class="k mono">Year</div><div class="v ph">[2024–2026]</div></div>
+      <div><div class="k mono">Team</div><div class="v">20+ cross-functional</div></div>
+    </div>
+
+    <figure class="hero-fig">
+      <img src="_projects/Biomass-Camera-V2/BiomassV2_6.jpeg" alt="BMC V2 camera on the optical bench">
+      <figcaption>The BMC V2 on the bench with the stereo camera pair and light heads mounted. <span class="ph">[placeholder caption]</span></figcaption>
+    </figure>
+
+    <h2>Background</h2>
+    <p>Fish farms feed by estimate. If the estimate is off, feed is wasted or fish are underfed, and harvest planning suffers. The BMC V2 is a subsea camera system that uses ML to estimate biomass in real time, so operators can feed and plan against measured weight rather than guesses.</p>
+
+    <h2>What I did</h2>
+    <p>I was the mechanical lead on a 20+ person team, so the physical side of the product was mine:</p>
+    <ul>
+      <li>Electronics packaging architecture for the camera and light housings.</li>
+      <li>Thermal management for continuous subsea operation.</li>
+      <li>Sub-millimeter tolerance stack-ups for the optical components.</li>
+      <li>Design analysis, product testing, and validation.</li>
+    </ul>
+
+    <div class="fig-grid">
+      <figure>
+        <img src="_projects/Biomass-Camera-V2/BiomassV2_1.jpeg" alt="">
+        <figcaption>Optical alignment rig. <span class="ph">[placeholder]</span></figcaption>
+      </figure>
+      <figure>
+        <img src="_projects/Biomass-Camera-V2/BiomassV2_3.jpeg" alt="">
+        <figcaption>Tank testing with the calibration target. <span class="ph">[placeholder]</span></figcaption>
+      </figure>
+    </div>
+
+    <h2>How it went</h2>
+    <p>The system launched to production in 2026 and is running at $2.5M ARR. Operators get biomass numbers without pulling fish, which reduces feed cost and makes harvest timing a data decision.</p>
+
+    <div class="skills">
+      <span>Mechanical Design</span><span>Electronics Packaging</span><span>Thermal Management</span><span>Pressure Vessel Design</span><span>Project Management</span>
+    </div>
+
+    <nav class="pn" style="border-bottom:none; padding:0">
+      <a href="#"><div class="k mono">← Previous</div><div class="t">Washdown Power Supply Enclosure</div></a>
+      <a href="#"><div class="k mono">Next →</div><div class="t">Net Pen Mortality Extraction System</div></a>
+    </nav>
+  </article>
+
+  <footer>
+    <div class="contact">
+      <div class="label mono">Get in touch</div>
+      <a class="big" href="#">LinkedIn ↗</a>
+    </div>
+    <div class="meta mono">
+      <div class="navlinks"><a href="#">Home</a><a href="#">About</a><a href="#">Projects</a></div>
+      <div>© 2026 Elias Prince</div>
+    </div>
+  </footer>
+</div>
+
+</body>
+</html>

@@ -1,5 +1,7 @@
 ---
 layout: post
+permalink: /projects/Aquaculture-Pens/
+redirect_from: /projects/Aquaculture-Pens/index/
 title: Offshore Aquaculture Net Pens
 tagline: Open-ocean net pens engineered to support fish stocks exceeding 100,000.
 description: Development of open-ocean aquaculture net pen systems designed to support fish stocks exceeding 100,000, enabling large-scale, sustainable seafood production.

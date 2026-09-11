@@ -1,29 +1,18 @@
+{% comment %}
+  Masonry set of uncaptioned images. Usage:
+    {% include image-gallery.html images="A.jpeg, B.jpeg, C.png" %}
+  Paths are relative to the project's folder. For captioned images use figure.html instead.
+{% endcomment %}
 {% assign image_paths = include.images | split: ", " %}
-{% assign gallery_height = include.height | default: "300" %}
+{% assign gallery_folder = page.path | split: "/" | slice: 0, 2 | join: "/" %}
 
 <div class="image-gallery">
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
       {% if image_name contains 'https://' %}
-          <img 
-              src="{{ image_name }}"
-              alt="Web image"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              decoding="async"
-              fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-              height="{{ gallery_height }}"
-          />
+          <img src="{{ image_name }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
       {% else %}
-          {% assign page_url_without_index = page.url | remove: 'index' | remove: '.html' %}
-          <img 
-              src="{{ page_url_without_index }}{{ image_name }}" 
-              alt="{{image_name}}"
-              loading="{% if forloop.first %}eager{% else %}lazy{% endif %}"
-              decoding="async"
-              fetchpriority="{% if forloop.first %}high{% else %}low{% endif %}"
-              height="{{ gallery_height }}"
-              onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
-          />
+          <img src="/{{ gallery_folder }}/{{ image_name }}" alt="" loading="{% if forloop.first %}eager{% else %}lazy{% endif %}" decoding="async">
       {% endif %}
   {% endfor %}
 </div>

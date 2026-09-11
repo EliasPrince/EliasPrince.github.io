@@ -1,5 +1,7 @@
 ---
 layout: post
+permalink: /projects/Mortality-System/
+redirect_from: /projects/Mortality-System/index/
 title: Aquaculture Net Pen Mortality Extraction System
 tagline: Subsea system automating mortality removal from open-ocean net pens.
 description: A subsea mechanical system designed to automate the removal of deceased fish from open-ocean net pens, improving operational efficiency and enhancing farm operator safety.

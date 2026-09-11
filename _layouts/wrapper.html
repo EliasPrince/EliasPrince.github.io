@@ -4,31 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    
+    {% comment %} Per-page title + description + social preview {% endcomment %}
+    {% if page.title %}{% assign page_title = page.title | append: " — " | append: site.name %}{% else %}{% assign page_title = site.title %}{% endif %}
+    {% assign page_desc = page.tagline | default: page.description | default: site.description | strip_newlines | strip %}
+    {% if page['main-image'] %}
+      {% assign og_folder = page.path | split: "/" | slice: 0, 2 | join: "/" %}
+      {% assign og_image = "/" | append: og_folder | append: page['main-image'] %}
+    {% else %}
+      {% assign og_image = site.profile_image | prepend: "/" %}
+    {% endif %}
+
+    <title>{{ page_title }}</title>
+    <meta name="description" content="{{ page_desc }}">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="{{ site.name }}">
+    <meta property="og:title" content="{{ page_title }}">
+    <meta property="og:description" content="{{ page_desc }}">
+    <meta property="og:url" content="{{ page.url | absolute_url }}">
+    <meta property="og:image" content="{{ og_image | absolute_url }}">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="canonical" href="{{ page.url | absolute_url }}">
+
+    {% comment %} Favicon: the EP monogram box, inline so there is nothing extra to host {% endcomment %}
+    {% assign name_parts = site.name | split: ' ' %}
+    {% assign fl = name_parts | first | slice: 0, 1 %}{% assign ll = name_parts | last | slice: 0, 1 %}
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='{{ site.colors.background | replace: '#', '%23' }}'/%3E%3Crect x='3' y='3' width='58' height='58' fill='none' stroke='{{ site.colors.text | replace: '#', '%23' }}' stroke-width='3'/%3E%3Ctext x='32' y='42' text-anchor='middle' font-family='IBM Plex Mono, Menlo, monospace' font-weight='600' font-size='28' fill='{{ site.colors.text | replace: '#', '%23' }}'%3E{{ fl }}{{ ll }}%3C/text%3E%3C/svg%3E">
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    
 
     <link rel="stylesheet" href="/css/styles.css">
     <link rel="stylesheet" href="/css/syntax.css">
 
     <script src="{{ '/assets/js/script.js' | relative_url }}"></script>
-
-    
-    <title>{{ site.title }}</title>
-    
-
 </head>
 <body>
-    <!-- NAVBAR -->
-     {% include navbar.html%}
+    {% include navbar.html %}
 
-     <div class="page">{{content}}</div>
+    <div class="page">{{ content }}</div>
 
-     
+    {% include footer.html %}
 </body>
-
-    {% include footer.html%}
 </html>

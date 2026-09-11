@@ -1,43 +1,60 @@
 ---
 layout: wrapper
 ---
+{% assign sorted_projects = site.projects | sort: "year", "first" | reverse %}
+{% assign current_index = nil %}
+{% for p in sorted_projects %}
+  {% if p.url == page.url %}{% assign current_index = forloop.index0 %}{% endif %}
+{% endfor %}
+{% assign prev_project = nil %}{% assign next_project = nil %}
+{% if current_index %}
+  {% if current_index > 0 %}{% assign prev_i = current_index | minus: 1 %}{% assign prev_project = sorted_projects[prev_i] %}{% endif %}
+  {% assign next_i = current_index | plus: 1 %}
+  {% if next_i < sorted_projects.size %}{% assign next_project = sorted_projects[next_i] %}{% endif %}
+{% endif %}
 
-<div class="post-view">
-    <div class="summary">
+{% assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" %}
+{% assign image_path = "/" | append: folder_path | append: page['main-image'] %}
 
-        <a href="/projects/" class="back-link">&larr; All Projects</a>
+<article class="project-page">
+    <a href="/projects/" class="back-link">&larr; All projects</a>
 
-        <div class="title-header">
-            <h1>{{page.title}}</h1>
-        </div>
+    <h1>{{ page.title }}</h1>
+    {% if page.tagline %}<p class="tagline">{{ page.tagline }}</p>{% endif %}
 
-        {% assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" %}
-        {% assign image_path = "/" | append: folder_path | append: page['main-image'] %}       
-        <img 
-            src="{{ image_path }}" 
-            alt="{{ page.title }} image"
-            loading="eager"
-            fetchpriority="high"
-            decoding="async"
-            style="display: block; margin: 0 auto; max-width: 100%; height: auto;"
-        >
-        
-        <div class="project-description">
-            <h2>Project Overview</h2>
-            <p>{{ page.description }}</p>
-        </div>
-        <div class="skills-card">
-            <h2>Skills Used</h2> 
-            <div class="skills-list">
-                {% for skill in page.skills %}
-                <span class="skill">{{ skill }}</span>    
-                {% endfor %}
-            </div>
-        </div>
+    {% if page.role or page.org or page.year or page.team %}
+    <div class="meta-strip">
+        {% if page.role %}<div><span class="k">Role</span><span class="v">{{ page.role }}</span></div>{% endif %}
+        {% if page.org %}<div><span class="k">Org</span><span class="v">{{ page.org }}</span></div>{% endif %}
+        {% if page.year %}<div><span class="k">Year</span><span class="v">{{ page.year }}</span></div>{% endif %}
+        {% if page.team %}<div><span class="k">Team</span><span class="v">{{ page.team }}</span></div>{% endif %}
     </div>
-      
+    {% endif %}
+
+    <figure class="fig hero-fig">
+        <img src="{{ image_path }}" alt="{{ page.title }}" loading="eager" fetchpriority="high" decoding="async">
+        {% if page.main-caption %}<figcaption>{{ page.main-caption }}</figcaption>{% endif %}
+    </figure>
+
     <div class="content">
-        {{content}}
+        {% if page.description %}<p class="overview">{{ page.description }}</p>{% endif %}
+        {{ content }}
     </div>
-</div>
 
+    {% if page.skills %}
+    <div class="skills-list">
+        {% for skill in page.skills %}<span class="skill">{{ skill }}</span>{% endfor %}
+    </div>
+    {% endif %}
+
+    {% if prev_project or next_project %}
+    <nav class="prev-next" aria-label="More projects">
+        {% if prev_project %}
+        <a href="{{ prev_project.url }}" class="prev"><span class="k">&larr; Previous</span><span class="t">{{ prev_project.title }}</span></a>
+        {% else %}<span></span>{% endif %}
+        {% if next_project %}
+        <a href="{{ next_project.url }}" class="next"><span class="k">Next &rarr;</span><span class="t">{{ next_project.title }}</span></a>
+        {% endif %}
+    </nav>
+    {% endif %}
+</article>

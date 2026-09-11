@@ -1,36 +1,90 @@
-<!-- SECTION: project -->
+{% comment %}
+  Project index. Two modes:
+    {% include projects.html %}                                  -> full index of every project (/projects/)
+    {% include projects.html featured_only=true heading="..." show_view_all=true %}
+                                                                 -> Home: one lead project + compact rows for the other featured ones
+  Sort: newest `year` first; projects without a year fall to the end.
+  Optional front matter used here: year, role, org, team, summary, featured, lead.
+{% endcomment %}
+{% assign sorted_projects = site.projects | sort: "year", "first" | reverse %}
+
 {% if include.featured_only %}
-  {% assign project_list = site.projects | where: "featured", true %}
+  {% assign project_list = sorted_projects | where: "featured", true %}
+  {% assign lead_list = project_list | where: "lead", true %}
+  {% assign lead = lead_list | first | default: project_list[0] %}
 {% else %}
-  {% assign project_list = site.projects %}
+  {% assign project_list = sorted_projects %}
+  {% assign lead = nil %}
 {% endif %}
 
-<section id="projects" class="project-grid-section">
-    <h2>{{ include.heading | default: "Projects" }}</h2>
+<section id="projects" class="project-index-section">
+    <h2>{{ include.heading | default: "Projects" }}{% unless include.featured_only %}<span class="count">{{ project_list.size | prepend: "0" | slice: -2, 2 }}</span>{% endunless %}</h2>
 
-    <div class="grid-container">
-        {% for item in project_list %}
-    <a href="{{ item.url }}" class="project-link">
-        <div class="project-card">
-            {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
-            {% assign image_path = "/" | append: folder_path | append: item['main-image'] %}
-            <img src="{{ image_path }}" alt="{{ item.title }} image">
-            <h3 class="project-title">{{ item.title }}</h3>
-            <div class="project-skills">
-                {% assign top_skills = item.skills | slice: 0, 3 %}
-                {% for skill in top_skills %}
-                    <span class="skill">{{ skill }}</span>
-                {% endfor %}
+    {% if lead %}
+    {% assign lead_folder = lead.path | split: "/" | slice: 0, 2 | join: "/" %}
+    <a href="{{ lead.url }}" class="lead-project">
+        <div class="text">
+            <div class="eyebrow">01 / Featured</div>
+            <h3>{{ lead.title }}</h3>
+            {% if lead.role or lead.team or lead.year or lead.org %}
+            <div class="meta">
+                {% if lead.role %}<span>Role <b>{{ lead.role }}</b></span>{% endif %}
+                {% if lead.team %}<span>Team <b>{{ lead.team }}</b></span>{% endif %}
+                {% if lead.year %}<span>Year <b>{{ lead.year }}</b></span>{% endif %}
+                {% if lead.org %}<span>Org <b>{{ lead.org }}</b></span>{% endif %}
             </div>
-            <p class="project-description">{{ item.tagline | default: item.description }}</p>
-            <button class="read-more">Read more &rarr;</button>
+            {% endif %}
+            <p>{{ lead.summary | default: lead.tagline }}</p>
+            <span class="more">Read more &rarr;</span>
+        </div>
+        <div class="img">
+            <img src="/{{ lead_folder }}{{ lead['main-image'] }}" alt="{{ lead.title }}">
         </div>
     </a>
-{% endfor %}
+    {% endif %}
+
+    <div class="project-index{% if include.featured_only %} compact{% endif %}">
+        {% unless include.featured_only %}
+        <div class="row head">
+            <div></div>
+            <div class="year">Year</div>
+            <div>Project</div>
+            <div class="role">Role</div>
+            <div></div>
+        </div>
+        {% endunless %}
+
+        {% for item in project_list %}
+            {% if lead and item.url == lead.url %}{% continue %}{% endif %}
+            {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
+            <a href="{{ item.url }}" class="row">
+                <img class="thumb" src="/{{ folder_path }}{{ item['main-image'] }}" alt="" loading="lazy">
+                {% unless include.featured_only %}
+                <div class="year">{{ item.year }}</div>
+                {% endunless %}
+                <div class="text">
+                    <div class="title">{{ item.title }}</div>
+                    {% if item.tagline %}<div class="tag">{{ item.tagline }}</div>{% endif %}
+                </div>
+                <div class="role">
+                    {% if item.role %}<b>{{ item.role }}</b>{% endif %}
+                    {% assign sub = "" %}
+                    {% if item.org %}{% assign sub = item.org %}{% endif %}
+                    {% if include.featured_only and item.year %}
+                        {% if sub != "" %}{% assign sub = sub | append: " · " %}{% endif %}
+                        {% assign sub = sub | append: item.year %}
+                    {% elsif item.team %}
+                        {% if sub != "" %}{% assign sub = sub | append: " · " %}{% endif %}
+                        {% assign sub = sub | append: item.team %}
+                    {% endif %}
+                    {% if sub != "" %}<span>{{ sub }}</span>{% endif %}
+                </div>
+                <span class="arrow">&rarr;</span>
+            </a>
+        {% endfor %}
     </div>
 
     {% if include.show_view_all %}
-    <a href="/projects/" class="section-cta">View All Projects &rarr;</a>
+    <a href="/projects/" class="section-cta">All projects ({{ site.projects.size }}) &rarr;</a>
     {% endif %}
-
- </section>
+</section>
