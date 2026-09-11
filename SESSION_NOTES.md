@@ -1,3 +1,46 @@
+# Session Notes — 2026-09-10 (evening) — UI review + index layout port
+
+Picked up right after the multi-page IA rework below was committed. User asked for a creative UI review with everything on the table (IA, layout, nav, whether to have project cards at all), approved the direction from a standalone mockup, and had it ported and pushed the same evening. **Live on eliasprince.github.io as of commit `34878b9`.**
+
+## What shipped
+
+- **Project cards are gone.** `/projects/` is now a row index (thumb · year · title + tagline · role/org/team · arrow). Home shows one **lead project** block (`lead: true` in front matter, else the first featured project) plus compact rows for the other featured projects. Both modes come from the same `_includes/projects.html` via `featured_only`.
+- **New project page** (`_layouts/post.html`): no outer frame, title, tagline, a **meta strip** that only renders the fields a project has (role / org / year / team), the main image uncropped, `description` as an overview paragraph, then body content, skills tags, prev/next links.
+- **`_includes/figure.html`** for captioned images in project bodies: `{% include figure.html src="X.jpeg" caption="..." %}`; wrap two in `<div class="fig-grid">` for a pair. `image-gallery.html` still works for uncaptioned masonry sets (paths now derived from `page.path`, not `page.url`).
+- **Clean project URLs**: `/projects/<Folder>/` via per-project `permalink`, with `redirect_from: /projects/<Folder>/index/` so old links keep working (jekyll-redirect-from ships in the github-pages gem; added to `plugins:`).
+- **Head/meta**: per-page `<title>`, meta description, Open Graph tags (`url:` added to `_config.yml`), inline SVG "EP" favicon. Footer moved inside `<body>`.
+- **Nav** marks the current page (`aria-current`, hairline underline; Projects button fills when active). Hero "View Projects" now goes to `/projects/`, not the on-page anchor.
+- **Footer** = "Get in touch → LinkedIn" + site links + copyright. No email address anywhere on the site, no resume — both explicitly declined again. The Formspree contact form stays on Home only.
+- **Hero bio** rewritten in `_config.yml` `description` — first person, general, **no project specifics** (numbers/ARR/team size belong on project pages only). The About page renders the same paragraph. Skills categories reordered so Engineering comes first.
+- **Bugs fixed on the way**: template alt text "john doe headshot", `<button>` nested in `<a>`, hero `h3` accidentally going monospace, and the mobile menu showing the desktop links (a specificity bug — `nav .right` beat `.desktop-nav`; now `nav .right.desktop-nav`).
+
+## Taste calls confirmed this session (also in memory — see [[portfolio-design-feedback]])
+
+- Hero photo: **exactly the production size and square framing** — a smaller version and a full-height uncropped version were both rejected. Don't touch it again.
+- Index thumbnails: generous (168×118 on `/projects/`, 128×90 in Home rows).
+- Tone: inviting/easy-going. No "case study" wording, no figure numbers; project sections should read like "Background / What I did / How it went".
+- Project write-ups target **200–500 words + a few captioned pictures**, high-level, not design-review depth.
+- Not every project will have every meta field — that's fine; templates render only what exists. User will revisit fields when adding content.
+
+## Open items for next session
+
+- **Content.** This is the main remaining work. Each project still has only the front-matter `description` + an uncaptioned gallery. Plan per project: short body in three sections, 2–4 `figure.html` images with real captions, and fill `year` / `org` / `role` / `team` where they apply. Only the camera project has `year` (2026) so far, so the other four currently sort in reverse alphabetical order at the bottom of the index until years are added.
+- **Mortality-System** has 9 images but only `1,2,3,5,8` are used — still unresolved whether that's intentional.
+- **Scaling**: user flagged that the site should grow with his career (more projects, possibly an investments list if he moves into VC, possibly writing/Substack). Nothing built for it, but the index row pattern and extra Jekyll collections are the intended path; the "last nav item is a bordered button" CSS will need revisiting when a fourth nav item appears.
+- **Stack**: Jekyll is fine for now; Astro would be the move if collections multiply. Content (front matter + markdown + images in folders) is portable either way. Don't propose a migration unprompted.
+- Mockups `style-test.html` / `layout-test.html` were deleted after the port; they're in git history if ever needed.
+
+## Verifying layouts locally
+
+Headless Chrome won't go narrower than ~500px, and the Chrome extension's window resize is unreliable in this environment. For a true phone-width check, put the page in a 390px `<iframe>` inside a wide headless screenshot:
+
+```bash
+"/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --hide-scrollbars \
+  --window-size=1440,2400 --screenshot=out.png http://localhost:4321/
+```
+
+---
+
 # Session Notes — 2026-09-10
 
 Continuation of the 2026-09-09 visual-direction work below — picked up after the style port was already live. Two separate pieces of work happened this session; read both before continuing.
@@ -26,7 +69,7 @@ User said to ignore the legacy layout and rethink navigation/IA/content structur
 
 Full details on the resulting structure and front-matter conventions are in the [[portfolio-ia-and-conventions]] memory — read that before adding new projects or pages rather than re-deriving conventions from the templates.
 
-Committed as `c00d7ae` (Part 1) and `63c422b` (Part 2) on `main`. **Not pushed to `origin/main`** as of this session — confirm with the user before pushing.
+Committed as `c00d7ae` (Part 1) and `63c422b` (Part 2) on `main` — pushed later on 2026-09-10 along with the index-layout port above.
 
 ---
 
@@ -110,12 +153,10 @@ Rule of thumb: real camera photos → JPEG compresses well. Renders/screenshots/
 **Updated 2026-09-10 — see the session notes at the top of this file for what's since been resolved.** Remaining/open items, roughly in likely priority order:
 
 - **Add more project content/images** — the original ask, still not done. Current 5 projects each have a tagline + description + top skill tags + photo gallery. They may want *more projects* added (the IA now supports this cleanly — see [[portfolio-ia-and-conventions]]), or more photos per existing project.
-- **`/projects/` catalog grid has 5 cards** in a 2-column layout, leaving one card alone on the last row. Offered a fix (CSS `nth-child` trick to center an odd last card) but user moved on to the IA rework instead before answering — still open. Resolves itself if a 6th project gets added, or ask again.
 - **`_projects/Mortality-System/`** has 9 images (`Mortality1.jpeg`...`Mortality9.jpeg`) but the gallery only includes `1,2,3,5,8` — `4,6,9` are unused. Still unclear if intentional; worth asking the user.
 - **Resume** — explicitly deferred again on 2026-09-10 when building the new `/about/` page (user said "skip resume for now"). No PDF in the repo. Add a link there once a current PDF exists — see [[portfolio-ia-and-conventions]] for where the About page content lives.
 - **Bigger-picture stack rework**: user is open to changing the stack entirely in a *future* pass (not now) — this is still true even after the 2026-09-10 IA rework, which stayed within Jekyll. Don't propose a framework migration unprompted; see [[portfolio-rework-plans]] memory.
 - **Custom domain**: user considered buying `eliasprince.com` for ~$0.01 but it turned out to cost more than that at checkout — decided to hold off. Worth revisiting if/when they start writing blog content (the new IA has room for a future `/writing/` or `/blog/` top-level page).
-- **Push to `origin/main`**: as of 2026-09-10 the last several commits (including the IA rework) are local-only on `main`, not pushed — GitHub Pages won't reflect any of this until it's pushed.
 
 ## Repo/environment facts worth knowing
 
