@@ -1,6 +1,40 @@
+# Session Notes — 2026-09-10
+
+Continuation of the 2026-09-09 visual-direction work below — picked up after the style port was already live. Two separate pieces of work happened this session; read both before continuing.
+
+## Part 1: Project detail page cleanup
+
+Started from "the project pages feel janky." Root-caused and fixed several real bugs, not just taste tweaks:
+
+- **The image gallery's flex-wrap CSS was completely dead** — `_includes/image-gallery.html`'s wrapper `<div>` was missing the `image-gallery` class the CSS targeted, so every project image rendered as its own full-width centered block instead of a grid. Fixed the include, and merged each project's one-include-per-image markdown calls into a single comma-separated call per project.
+- Per user feedback, replaced the flex-wrap image row entirely with a **CSS-columns masonry gallery** (native aspect ratios, no cropping, no per-image border) — see [[portfolio-design-feedback]] memory for why (he explicitly prefers no-crop over a more "professional-looking" cropped grid).
+- Post title left-aligned and resized to match the rest of the site's type scale (was centered and oversized — a leftover from before the style port). Added a "← All Projects" back-link. Section headings ("Project Overview", "Skills Used") got the same accent-square marker used elsewhere.
+- Centered the summary/content column (`max-width: 880px`) so text, tags, and gallery all line up with the hero image width instead of spanning the full wide frame.
+- Removed the hairline border on the hero project image; removed the LinkedIn icon badge next to the name in the hero (the separate "LinkedIn ↗" button lower down was kept).
+- Site-wide bug fixes found during a broader audit: project card descriptions were clipping mid-character with no ellipsis (invalid `line-clamp: 4px` fighting a conflicting `max-height`); the Contact section was a narrow centered island inconsistent with the left-aligned, full-width Projects/Skills sections.
+
+## Part 2: Multi-page IA rework
+
+User said to ignore the legacy layout and rethink navigation/IA/content structure entirely ("everything is on the table"). Proposed and got sign-off on going multi-page. Shipped:
+
+- **New `/about/` page** — bio (built from `_config.yml`'s `name`/`headline`/`description`) + the full categorized skills grid, moved off the homepage. No resume link — user explicitly deferred that (see [[portfolio-rework-plans]]).
+- **Home trimmed** to hero + 3 *featured* projects (not the full catalog, which used to be duplicated verbatim between `/` and `/projects/`) + a "View All Projects →" link + Contact.
+- **`/projects/`** is now the sole full catalog page.
+- Added a `tagline` front-matter field per project for short card blurbs, so cards no longer show the long paragraph `description` (that's detail-page-only now) — fixes the "run-on text in cards" complaint. Cards also now show only the top 3 skill tags instead of all 5.
+- Nav/footer updated to Home / About / Projects everywhere; Projects deliberately kept as the last nav item so it keeps the `nav .right a:last-child` CTA-button styling.
+- Contact form is centered within its section while the "Contact" heading stays left-aligned like every other section header — see [[portfolio-design-feedback]] for this pattern (left-aligned headers + marker, centered content is fine).
+
+Full details on the resulting structure and front-matter conventions are in the [[portfolio-ia-and-conventions]] memory — read that before adding new projects or pages rather than re-deriving conventions from the templates.
+
+Committed as `c00d7ae` (Part 1) and `63c422b` (Part 2) on `main`. **Not pushed to `origin/main`** as of this session — confirm with the user before pushing.
+
+---
+
 # Session Notes — 2026-09-09
 
 Handoff from a visual-design session, picked up right after the 2026-09-08 cleanup pass below. **No production files changed** — this session was scoped entirely to nailing down a new visual direction before porting it. Read this before picking up the port.
+
+**Update (2026-09-10): the port described below is done.** `css/styles.css`, `_config.yml`'s `colors:` block, and `_layouts/wrapper.html`/`_includes/navbar.html` were all updated to the new direction later on 2026-09-09 (see commits `5c7fa01`, `1f87f02`, `b5d0380`). The 2026-09-10 session above builds on top of that finished port — don't re-port from `style-test.html`.
 
 ## What happened this session
 
@@ -73,14 +107,15 @@ Rule of thumb: real camera photos → JPEG compresses well. Renders/screenshots/
 
 ## What's NOT done yet — likely next-session work
 
-The user's original ask was "add more text and images" and "clear UI that isn't janky." This session was almost entirely bug-fixing and cleanup — it did NOT add new content. Remaining/open items, roughly in likely priority order:
+**Updated 2026-09-10 — see the session notes at the top of this file for what's since been resolved.** Remaining/open items, roughly in likely priority order:
 
-- **Add more project content/images** — the actual ask. Current 5 projects each have a short description + 5 skill tags + photo gallery, which the user said is enough depth per project — but they may want *more projects* added, or more photos per existing project.
-- **Resume** — link and PDF were removed because the PDF was out of date. Needs a new PDF re-added to `assets/resume/` + the nav/footer links restored (see git history around `fafe33c` for exactly what was removed, easy to reverse).
-- **Project grid has 5 cards** in a 2-column grid, leaving one slot empty/asymmetric on the last row. Not broken, just slightly uneven — resolves itself if a 6th project gets added.
-- **`_projects/Mortality-System/`** has 9 images (`Mortality1.jpeg`...`Mortality9.jpeg`) but the gallery only includes `1,2,3,5,8` — `4,6,9` are unused. Unclear if intentional; worth asking the user.
-- **Bigger-picture rework**: user is open to changing the stack entirely in a *future* pass (not now) — see conversation history / memory for context. Don't propose this unprompted; they want the current Jekyll site kept stable for now while they're actively applying to jobs.
-- **Custom domain**: user considered buying `eliasprince.com` for ~$0.01 but it turned out to cost more than that at checkout — decided to hold off. Worth revisiting if/when they start writing blog content (mentioned wanting a blog for future VC/founder-adjacent job applications).
+- **Add more project content/images** — the original ask, still not done. Current 5 projects each have a tagline + description + top skill tags + photo gallery. They may want *more projects* added (the IA now supports this cleanly — see [[portfolio-ia-and-conventions]]), or more photos per existing project.
+- **`/projects/` catalog grid has 5 cards** in a 2-column layout, leaving one card alone on the last row. Offered a fix (CSS `nth-child` trick to center an odd last card) but user moved on to the IA rework instead before answering — still open. Resolves itself if a 6th project gets added, or ask again.
+- **`_projects/Mortality-System/`** has 9 images (`Mortality1.jpeg`...`Mortality9.jpeg`) but the gallery only includes `1,2,3,5,8` — `4,6,9` are unused. Still unclear if intentional; worth asking the user.
+- **Resume** — explicitly deferred again on 2026-09-10 when building the new `/about/` page (user said "skip resume for now"). No PDF in the repo. Add a link there once a current PDF exists — see [[portfolio-ia-and-conventions]] for where the About page content lives.
+- **Bigger-picture stack rework**: user is open to changing the stack entirely in a *future* pass (not now) — this is still true even after the 2026-09-10 IA rework, which stayed within Jekyll. Don't propose a framework migration unprompted; see [[portfolio-rework-plans]] memory.
+- **Custom domain**: user considered buying `eliasprince.com` for ~$0.01 but it turned out to cost more than that at checkout — decided to hold off. Worth revisiting if/when they start writing blog content (the new IA has room for a future `/writing/` or `/blog/` top-level page).
+- **Push to `origin/main`**: as of 2026-09-10 the last several commits (including the IA rework) are local-only on `main`, not pushed — GitHub Pages won't reflect any of this until it's pushed.
 
 ## Repo/environment facts worth knowing
 
