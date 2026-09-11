@@ -11,13 +11,4 @@ skills:
 main-image: /BiomassV2_6.jpeg
 ---
 
-{% include image-gallery.html images="BiomassV2_1.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="BiomassV2_2.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="BiomassV2_3.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="BiomassV2_4.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="BiomassV2_5.jpeg" height="400" %}
-<br>
+{% include image-gallery.html images="BiomassV2_1.jpeg, BiomassV2_2.jpeg, BiomassV2_3.jpeg, BiomassV2_4.jpeg, BiomassV2_5.jpeg" height="340" %}

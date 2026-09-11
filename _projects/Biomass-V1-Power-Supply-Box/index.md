@@ -11,15 +11,4 @@ skills:
 main-image: /PowerSupplyBox7.jpeg
 ---
 
-{% include image-gallery.html images="PowerSupplyBox1.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="PowerSupplyBox2.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="PowerSupplyBox3.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="PowerSupplyBox4.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="PowerSupplyBox5.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="PowerSupplyBox6.jpeg" height="400" %}
-<br>
+{% include image-gallery.html images="PowerSupplyBox1.jpeg, PowerSupplyBox2.jpeg, PowerSupplyBox3.jpeg, PowerSupplyBox4.jpeg, PowerSupplyBox5.jpeg, PowerSupplyBox6.jpeg" height="340" %}

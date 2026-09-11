@@ -1,7 +1,7 @@
 {% assign image_paths = include.images | split: ", " %}
 {% assign gallery_height = include.height | default: "300" %}
 
-<div style="text-align: center;">
+<div class="image-gallery">
   {% for image_path in image_paths %}
       {% assign image_name = image_path | strip %}
       {% if image_name contains 'https://' %}
@@ -25,6 +25,5 @@
               onerror="this.onerror=null;this.src=this.src.replace('.webp','.png').replace('.png','.webp');"
           />
       {% endif %}
-      <br>
   {% endfor %}
 </div>

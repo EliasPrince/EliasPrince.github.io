@@ -4,11 +4,13 @@ layout: wrapper
 
 <div class="post-view">
     <div class="summary">
-               
+
+        <a href="/projects/" class="back-link">&larr; All Projects</a>
+
         <div class="title-header">
             <h1>{{page.title}}</h1>
         </div>
-       
+
         {% assign folder_path = page.path | split: "/" | slice: 0, 2 | join: "/" %}
         {% assign image_path = "/" | append: folder_path | append: page['main-image'] %}       
         <img 

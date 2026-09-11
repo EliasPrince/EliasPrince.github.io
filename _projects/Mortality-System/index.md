@@ -11,13 +11,4 @@ skills:
 main-image: /Mortality7.jpeg
 ---
 
-{% include image-gallery.html images="Mortality1.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="Mortality2.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="Mortality3.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="Mortality5.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="Mortality8.jpeg" height="400" %}
-<br>
+{% include image-gallery.html images="Mortality1.jpeg, Mortality2.jpeg, Mortality3.jpeg, Mortality5.jpeg, Mortality8.jpeg" height="340" %}

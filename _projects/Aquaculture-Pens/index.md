@@ -11,17 +11,4 @@ skills:
 main-image: /SeaProtean1.jpeg
 ---
 
-{% include image-gallery.html images="SeaProtean2.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation1.png" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation2.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation3.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation4.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation5.jpeg" height="400" %}
-<br>
-{% include image-gallery.html images="SeaStation6.jpeg" height="400" %}
-<br>
+{% include image-gallery.html images="SeaProtean2.jpeg, SeaStation1.png, SeaStation2.jpeg, SeaStation3.jpeg, SeaStation4.jpeg, SeaStation5.jpeg, SeaStation6.jpeg" height="340" %}

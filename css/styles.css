@@ -199,22 +199,6 @@ nav .mobile-nav {
     margin-bottom: 10px;
 }
 
-.hero-section .text .external-links {
-    display: inline-flex;
-    align-items: center;
-}
-
-.hero-section .text .external-links i {
-    font-size: 20px;
-    padding: 0 5px;
-    color: var(--link-color);
-    transition: color 0.2s ease;
-}
-
-.hero-section .text .external-links a:hover i {
-    color: var(--highlight-color);
-}
-
 .hero-section .text h3 {
     font-size: 16px;
     color: var(--dim-color);
@@ -320,12 +304,20 @@ nav .mobile-nav {
 
 .project-grid-section h2::before,
 .skills-section h2::before,
-.contact-section h2::before {
+.contact-section h2::before,
+.post-view .summary h2::before {
     content: '';
     width: 8px;
     height: 8px;
     background: var(--link-color);
     flex-shrink: 0;
+}
+
+.post-view .summary h2 {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 20px 0 12px;
 }
 
 .project-grid-section .grid-container {
@@ -719,11 +711,32 @@ footer p {
     padding: 35px 50px 25px;
   }
 
+.post-view .summary,
+.post-view .content {
+    max-width: 880px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.post-view .back-link {
+    display: inline-block;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--dim-color);
+    margin-bottom: 18px;
+}
+
+.post-view .back-link:hover {
+    color: var(--link-color);
+}
+
 .post-view .title-header h1 {
-    text-align: center;      /* centers the title */
-    font-size: calc(18px + 2vw); /* slightly larger and responsive */
-    line-height: 1.2;
-    margin: 0 0 20px 0;      /* padding below the title */
+    text-align: left;
+    font-size: calc(16px + 1.3vw);
+    line-height: 1.25;
+    margin: 0 0 24px 0;
 }
 
 .post-view .summary img {
@@ -736,7 +749,6 @@ footer p {
     border-radius: 0;
     object-fit: contain;
     box-shadow: none;
-    border: 1px solid var(--border-color);
     filter: grayscale(0.25) contrast(1.05);
 }
 
@@ -779,22 +791,17 @@ footer p {
 }
 
 .post-view .content .image-gallery {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: flex-start;
-    align-content: flex-start;
+    column-count: 3;
+    column-gap: 12px;
     width: 100%;
-    gap: 10px
 }
 
 .post-view .content .image-gallery img {
-    max-height: var(--gallery-height);
-    width: auto;
-    max-width: 100%;
-    object-fit: contain;
-    align-self: flex-start;
-    border: 1px solid var(--border-color);
+    display: block;
+    width: 100%;
+    height: auto;
+    margin-bottom: 12px;
+    break-inside: avoid;
 }
 
 .post-view .content  a {
@@ -980,11 +987,6 @@ footer p {
         font-size: 32px;
       }
 
-    .hero-section .group .text h2 .external-links i {
-        font-size: 18px;
-        margin: 0
-    }
-
     .project-grid-section .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     }
@@ -1020,10 +1022,14 @@ footer p {
 
 
     }
-    .post-view.image-gallery {
-        column-gap: 5px;
-        row-gap: 5px;
-      }
+    .post-view .content .image-gallery {
+        column-count: 2;
+        column-gap: 8px;
+    }
+
+    .post-view .content .image-gallery img {
+        margin-bottom: 8px;
+    }
 
     .video-container {
         margin:0 auto;
@@ -1078,5 +1084,8 @@ footer p {
         padding: 5px;
       }
 
+    .post-view .content .image-gallery {
+        column-count: 1;
+    }
 
 }
