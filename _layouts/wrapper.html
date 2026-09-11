@@ -4,26 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    {% comment %} Per-page title + description + social preview {% endcomment %}
+    {% comment %} Per-page title + description {% endcomment %}
     {% if page.title %}{% assign page_title = page.title | append: " — " | append: site.name %}{% else %}{% assign page_title = site.title %}{% endif %}
     {% assign page_desc = page.tagline | default: page.description | default: site.description | strip_newlines | strip %}
-    {% if page['main-image'] %}
-      {% assign og_folder = page.path | split: "/" | slice: 0, 2 | join: "/" %}
-      {% assign og_image = "/" | append: og_folder | append: page['main-image'] %}
-    {% else %}
-      {% assign og_image = site.profile_image | prepend: "/" %}
-    {% endif %}
 
     <title>{{ page_title }}</title>
     <meta name="description" content="{{ page_desc }}">
-    <meta property="og:type" content="website">
-    <meta property="og:site_name" content="{{ site.name }}">
-    <meta property="og:title" content="{{ page_title }}">
-    <meta property="og:description" content="{{ page_desc }}">
-    <meta property="og:url" content="{{ page.url | absolute_url }}">
-    <meta property="og:image" content="{{ og_image | absolute_url }}">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="canonical" href="{{ page.url | absolute_url }}">
 
     {% comment %} Favicon: the EP monogram box, inline so there is nothing extra to host {% endcomment %}
     {% assign name_parts = site.name | split: ' ' %}
