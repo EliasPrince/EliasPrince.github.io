@@ -119,6 +119,7 @@ include:
 exclude:
   - CLAUDE.md
   - SESSION_NOTES.md
+  - PROJECT_NOTES.md
   - Gemfile
   - Gemfile.lock
   - vendor/
