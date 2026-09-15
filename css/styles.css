@@ -626,8 +626,6 @@ nav .mobile-nav {
     color: var(--dim-color);
     display: block;
     margin-bottom: 14px;
-    padding-bottom: 10px;
-    border-bottom: 1px dashed var(--border-color);
 }
 
 .skills-section .skill-categories .skills-list {
