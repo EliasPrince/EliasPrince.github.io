@@ -22,3 +22,7 @@ This is a **Jekyll static site** hosted on GitHub Pages — no Node.js, no build
 - `_site/` is generated output — never edit files there directly
 
 **Content flow:** `_config.yml` data → Liquid templates in `_layouts/` and `_includes/` → rendered HTML in `_site/`
+
+## Content rules
+
+- **Never write or draft content about Elias without his explicit permission.** This covers bios, project write-ups, captions, meta fields (year/org/role/team), and any prose that describes his work or background. He supplies the facts and the draft; Claude edits, tightens, and wires it into the site. Do not invent, infer, or "placeholder" biographical or project details, and do not start drafting project content proactively — wait until he provides the source material and asks.
