@@ -550,8 +550,27 @@ nav .mobile-nav {
     border-bottom: 1px solid var(--border-color);
 }
 
+.about-section .about-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 720px) 320px;
+    justify-content: space-between;
+    column-gap: 48px;
+    align-items: start;
+}
+
 .about-section .about-content {
     max-width: 720px;
+}
+
+.about-section .about-photo {
+    margin: 0;
+}
+
+.about-section .about-photo img {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--text-color);
+    filter: grayscale(0.3) contrast(1.05);
 }
 
 .about-section .about-content p {
@@ -1089,6 +1108,14 @@ figcaption {
 
 
 @media (max-width: 900px) {
+    .about-section .about-grid {
+        grid-template-columns: 1fr;
+        row-gap: 32px;
+    }
+    .about-section .about-photo {
+        max-width: 320px;
+    }
+
     .lead-project {
         grid-template-columns: 1fr;
         gap: 0;

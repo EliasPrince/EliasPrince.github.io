@@ -1,8 +1,16 @@
 <section id="about" class="about-section">
     <h2>About</h2>
 
-    <div class="about-content">
-        {% if site.about %}{{ site.about | markdownify }}{% else %}<p>{{ site.description }}</p>{% endif %}
+    <div class="about-grid">
+        <div class="about-content">
+            {% if site.about %}{{ site.about | markdownify }}{% else %}<p>{{ site.description }}</p>{% endif %}
+        </div>
+        {% if site.about_image %}
+        <figure class="about-photo">
+            <img src="{{ site.about_image | relative_url }}" alt="{{ site.name }}{% if site.about_image_caption %}, {{ site.about_image_caption }}{% endif %}" loading="lazy" decoding="async">
+            {% if site.about_image_caption %}<figcaption>{{ site.about_image_caption }}</figcaption>{% endif %}
+        </figure>
+        {% endif %}
     </div>
 </section>
 
