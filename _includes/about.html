@@ -1,8 +1,7 @@
 <section id="about" class="about-section">
-    <h2>About</h2>
-
     <div class="about-grid">
         <div class="about-content">
+            <h2>About</h2>
             {% if site.about %}{{ site.about | markdownify }}{% else %}<p>{{ site.description }}</p>{% endif %}
         </div>
         {% if site.about_image %}
