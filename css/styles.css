@@ -554,7 +554,7 @@ nav .mobile-nav {
     display: grid;
     grid-template-columns: 6fr 4fr;   /* same split as the hero text/headshot */
     column-gap: 60px;
-    align-items: start;
+    align-items: center;
 }
 
 .about-section .about-photo {
