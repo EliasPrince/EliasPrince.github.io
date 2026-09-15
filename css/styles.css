@@ -601,10 +601,6 @@ nav .mobile-nav {
     display: flex;
 }
 
-.skills-section .skill-categories .skills-card span {
-    margin-bottom: 0;
-}
-
 .skills-card {
     display: flex;
     flex-direction: column;
@@ -625,7 +621,7 @@ nav .mobile-nav {
     font-weight: 500;
     color: var(--dim-color);
     display: block;
-    margin-bottom: 14px;
+    margin-bottom: 20px;
 }
 
 .skills-section .skill-categories .skills-list {
