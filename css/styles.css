@@ -555,6 +555,10 @@ nav .mobile-nav {
 }
 
 .about-section .about-content p {
+    margin-bottom: 1.25em;
+}
+
+.about-section .about-content p:last-child {
     margin-bottom: 0;
 }
 

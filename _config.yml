@@ -17,6 +17,14 @@ description: >- # dont remove this line. this will ignore all new lines until th
   Most of my work has been in aquaculture hardware, with earlier years in structural analysis for ships.
   I enjoy small teams, messy problems, and getting to the point where something real is in the water.
 
+# About Page - longer bio, rendered as markdown (blank line = new paragraph). Falls back to `description` if empty.
+about: |
+  Hi, I'm Elias. I grew up in New York City, where the built environment was always in front of me, but it was at the University of Maryland that I found hardware and mechanical design. I graduated in mechanical engineering in 2020.
+
+  Since then, my work has spanned large ocean structures and subsea hardware. Across all of it, I've worked the full product development lifecycle, from initial concept through analysis and field testing, all the way to scaling production.
+
+  I love building something from scratch, but I'm just as happy owning the user experience across hardware and software, developing the roadmap, running a field test, or building out a process if that's what gets the job done. The ocean has been home base, and I get just as excited about robotics, aerospace, transportation, and climate tech. What gets me going is a hard technical problem in service of a mission worth chasing.
+
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
 profile_image: assets/images/profile-image/EliasPic.jpeg

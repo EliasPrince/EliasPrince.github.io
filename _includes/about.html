@@ -2,7 +2,7 @@
     <h2>About</h2>
 
     <div class="about-content">
-        <p>{{ site.description }}</p>
+        {% if site.about %}{{ site.about | markdownify }}{% else %}<p>{{ site.description }}</p>{% endif %}
     </div>
 </section>
 
