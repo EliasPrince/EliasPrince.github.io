@@ -552,14 +552,9 @@ nav .mobile-nav {
 
 .about-section .about-grid {
     display: grid;
-    grid-template-columns: minmax(0, 720px) 320px;
-    justify-content: space-between;
-    column-gap: 48px;
+    grid-template-columns: 6fr 4fr;   /* same split as the hero text/headshot */
+    column-gap: 60px;
     align-items: start;
-}
-
-.about-section .about-content {
-    max-width: 720px;
 }
 
 .about-section .about-photo {
