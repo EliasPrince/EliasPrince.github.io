@@ -14,7 +14,7 @@ name: Elias Prince
 headline: Mechanical Engineer, NYC
 description: >- # dont remove this line. this will ignore all new lines until the next section
   I'm a mechanical engineer who likes building physical things for hard environments.
-  Most of my work has been in aquaculture hardware, with earlier years in structural analysis for ships.
+  Most of my work has been in subsea hardware, with earlier years in structural analysis for ships.
   I enjoy small teams, messy problems, and getting to the point where something real is in the water.
 
 # About Page - longer bio, rendered as markdown (blank line = new paragraph). Falls back to `description` if empty.
