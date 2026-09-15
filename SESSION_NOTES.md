@@ -1,3 +1,30 @@
+# Session Notes — 2026-09-14 — About page content + photo
+
+Picked up from the 2026-09-10 index-layout port. All work is pushed and live. Working tree clean.
+
+## What shipped
+
+- **About page bio.** New `about:` value in `_config.yml` (multi-line, rendered via `markdownify`, blank line = paragraph). The hero on Home keeps the short `description:`; About no longer reuses it. Hero description wording tweaked to "subsea hardware" and "design and analysis for naval ships."
+- **About page photo.** `about_image:` / `about_image_caption:` in `_config.yml` render a framed, captioned photo beside the bio (`_includes/about.html`). Layout mirrors the hero: `6fr 4fr` grid, 60px gap, `align-items: center`, heading lives inside the text column so heading + paragraphs center as one block. Stacks under 900px. Photo is `assets/images/profile-image/Elias-Field-Testing.jpeg`, a near-square crop from a field-test shot (Tofino BC, Aug 2026 — location not in the caption yet).
+- **Skills grid.** Removed the dashed rule under category labels and a stale `.skills-card span { margin-bottom: 0 }` override that was silently zeroing the label margin; labels now have 20px below.
+- **CLAUDE.md content rule.** Never write or draft content about Elias without explicit permission — no bios, project bodies, captions, or year/org/role/team values, and no placeholders. He supplies facts/draft; Claude edits and wires in. This was a direct instruction after Claude started drafting a project page unprompted.
+- **`PROJECT_NOTES.md`** (repo root, **gitignored + excluded from the Jekyll build**) holds raw source facts for all five projects pulled from Claude chat. Contains internal part numbers, cost targets, and customer names — never commit it. A copy also lives in Claude's memory dir.
+
+## Image handling notes
+
+- iPhone exports may be HEIC data with a `.jpg`/`.jpeg` extension — always `sips -g format` first. Two frames of the same scene had identical byte sizes; don't assume same-size = same-file.
+- EXIF orientation: `sips` reports stored pixel dims, not displayed ones. A small Swift/CoreImage script was used to bake orientation and crop in displayed coordinates (lived in the session scratchpad; trivial to rewrite: load via ImageIO, `CIImage.oriented(forExifOrientation:)`, crop, write JPEG).
+- Browser cache bit three times because filenames didn't change. Elias declined a cache-busting query on the stylesheet link — just hard-refresh after deploys.
+
+## Open items
+
+- **Project content** is next. Source facts are in `PROJECT_NOTES.md`. Camera (BMC V2) and Navy FEA are well-documented; net pens, mortality system, and power supply enclosure still need year/role/ownership/outcome from Elias. Proposed public exclusions (part numbers, requirement IDs, cost targets, customer + teammate names, competitor note, exact window specs) are awaiting his confirmation.
+- Optional caption location for the About photo.
+- Elias asked about private repo + public site: GitHub Pro (~$4/mo) is the simple path; two-repo Action or Netlify/Cloudflare are free alternatives. No decision yet.
+- Mortality-System gallery still uses only images 1,2,3,5,8 of 9 — unresolved.
+
+---
+
 # Session Notes — 2026-09-10 (evening) — UI review + index layout port
 
 Picked up right after the multi-page IA rework below was committed. User asked for a creative UI review with everything on the table (IA, layout, nav, whether to have project cards at all), approved the direction from a standalone mockup, and had it ported and pushed the same evening. **Live on eliasprince.github.io as of commit `34878b9`.**
