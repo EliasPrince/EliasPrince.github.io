@@ -870,6 +870,11 @@ footer .license {
     margin: 0 auto;
 }
 
+/* A lone half-width figure (figure.html width="half" outside a .fig-grid) */
+.fig.fig-half {
+    max-width: calc(50% - 12px);
+}
+
 /* Renders and diagrams (PNG) keep their colours */
 .fig img[src$=".png"],
 .project-index .thumb[src$=".png"],
