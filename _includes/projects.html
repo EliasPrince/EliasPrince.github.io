@@ -43,6 +43,8 @@
     </a>
     {% endif %}
 
+    {% if lead and project_list.size == 1 %}{% assign rows_needed = false %}{% else %}{% assign rows_needed = true %}{% endif %}
+    {% if rows_needed %}
     <div class="project-index{% if include.featured_only %} compact{% endif %}">
         {% unless include.featured_only %}
         <div class="row head">
@@ -87,6 +89,7 @@
             </a>
         {% endfor %}
     </div>
+    {% endif %}
 
     {% if include.show_view_all %}
     <a href="/projects/" class="section-cta">All projects ({{ site.projects.size }}) &rarr;</a>
