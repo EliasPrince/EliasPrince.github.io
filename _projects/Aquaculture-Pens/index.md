@@ -12,7 +12,7 @@ skills:
 - Hydrostatic & Hydrodynamic Analysis
 - Design for Manufacturing
 - Systems Integration
-main-image: /SeaProtean1.jpeg
+main-image: /SeaProtean1.webp
 ---
 
-{% include image-gallery.html images="SeaProtean2.jpeg, SeaStation1.png, SeaStation2.jpeg, SeaStation3.jpeg, SeaStation4.jpeg, SeaStation5.jpeg, SeaStation6.jpeg" height="340" %}
+{% include image-gallery.html images="SeaProtean2.webp, SeaStation1.png, SeaStation2.webp, SeaStation3.webp, SeaStation4.webp, SeaStation5.webp, SeaStation6.webp" height="340" %}

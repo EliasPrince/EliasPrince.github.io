@@ -6,7 +6,7 @@
         </div>
         {% if site.about_image %}
         <figure class="about-photo">
-            <img src="{{ site.about_image | relative_url }}" alt="{{ site.name }}{% if site.about_image_caption %}, {{ site.about_image_caption }}{% endif %}" loading="lazy" decoding="async">
+            <img src="{{ site.about_image | relative_url }}" alt="{{ site.name }}{% if site.about_image_caption %}, {{ site.about_image_caption }}{% endif %}" loading="eager" fetchpriority="high" decoding="async">
             {% if site.about_image_caption %}<figcaption>{{ site.about_image_caption }}</figcaption>{% endif %}
         </figure>
         {% endif %}

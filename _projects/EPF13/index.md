@@ -11,7 +11,7 @@ skills:
 - Nonlinear Analysis
 - Regulatory Compliance
 - Workflow Automation
-main-image: /EPF13_2.png 
+main-image: /EPF13_2.png
 ---
 
-{% include image-gallery.html images="EPF13_1.jpeg" height="340" %}
+{% include image-gallery.html images="EPF13_1.webp" height="340" %}

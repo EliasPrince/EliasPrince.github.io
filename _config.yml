@@ -27,10 +27,10 @@ about: |
 
 
 # Place your profile image in /assets/images/profile-image/folder and edit the file name
-profile_image: assets/images/profile-image/EliasPic.jpeg
+profile_image: assets/images/profile-image/EliasPic.webp
 
 # Optional second photo shown beside the bio on the About page (leave blank to hide)
-about_image: assets/images/profile-image/Elias-Field-Testing.jpeg
+about_image: assets/images/profile-image/Elias-Field-Testing.webp
 about_image_caption: Field testing, August 2026
 
 # Set up external links - this will show up as small icons next to your name.

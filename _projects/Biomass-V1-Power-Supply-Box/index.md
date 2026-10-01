@@ -11,7 +11,7 @@ skills:
 - Waterproofing & Sealing
 - Rapid Prototyping
 - Embedded Systems
-main-image: /PowerSupplyBox7.jpeg
+main-image: /PowerSupplyBox7.webp
 ---
 
-{% include image-gallery.html images="PowerSupplyBox1.jpeg, PowerSupplyBox2.jpeg, PowerSupplyBox3.jpeg, PowerSupplyBox4.jpeg, PowerSupplyBox5.jpeg, PowerSupplyBox6.jpeg" height="340" %}
+{% include image-gallery.html images="PowerSupplyBox1.webp, PowerSupplyBox2.webp, PowerSupplyBox3.webp, PowerSupplyBox4.webp, PowerSupplyBox5.webp, PowerSupplyBox6.webp" height="340" %}

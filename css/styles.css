@@ -873,11 +873,13 @@ footer .license {
 /* Renders and diagrams (PNG) keep their colours */
 .fig img[src$=".png"],
 .project-index .thumb[src$=".png"],
+.project-index .thumb.render,
 .lead-project .img img[src$=".png"] {
     filter: none;
 }
 
-.project-index .thumb[src$=".png"] {
+.project-index .thumb[src$=".png"],
+.project-index .thumb.render {
     object-fit: contain;
     background: #fff;
 }

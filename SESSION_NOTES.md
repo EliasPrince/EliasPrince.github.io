@@ -1,3 +1,30 @@
+# Session Notes — 2026-09-30 — Image loading speed
+
+Elias noticed the About photo loading slowly. Audit found three causes: every photo was a 1600px JPEG at 300KB–1.1MB, the project index rows were pulling each project's full-size main image for a 168px thumbnail (~3.3MB on `/projects/`), and the About photo had `loading="lazy"` even though it sits above the fold.
+
+## What changed
+
+- **All JPEGs are now WebP** (quality 75, max 1600px): 16.4MB → 6.8MB across the site. PNG renders (`EPF13_2.png`, `SeaStation1.png`) stay PNG so the `[src$=".png"]` CSS rules keep working. Front matter, gallery includes, and `_config.yml` image paths were rewritten to `.webp`.
+- **Index thumbnails.** `_includes/projects.html` now loads `<main-image basename>-thumb.webp` (400px wide, 15–45KB) for index rows. A `render` class is added when the main image is a PNG so the thumb gets the no-filter/contain treatment without needing a `.png` extension. **Convention: every project needs a `<main-image>-thumb.webp` next to its main image.**
+- **Above-the-fold priority.** About photo is `loading="eager" fetchpriority="high"`; hero headshot got `fetchpriority="high"`.
+
+## Image pipeline (updated)
+
+`cwebp` is installed via Homebrew (`brew install webp`). macOS ImageIO can't write WebP, so cwebp is required. cwebp ignores EXIF orientation, so bake orientation first with a tiny Swift/ImageIO pass (`CGImageSourceCreateThumbnailAtIndex` with `kCGImageSourceCreateThumbnailWithTransform`) to a q0.97 JPEG, then:
+
+```bash
+cwebp -quiet -m 6 -q 75 -metadata none in.jpg -o out.webp            # full size
+cwebp -quiet -m 6 -q 75 -resize 400 0 out.webp -o out-thumb.webp      # index thumb
+```
+
+Verified locally: all referenced images resolve in `_site`, every image decodes at its original dimensions, portrait shots are upright. Note: the Chrome extension's screenshot tool blanks out large CSS-filtered images (also on the old build) — check `naturalWidth` via JS instead.
+
+## Still open
+
+Unchanged from 2026-09-14: project content, About caption location, private repo question, Mortality gallery 5-of-9.
+
+---
+
 # Session Notes — 2026-09-14 — About page content + photo
 
 Picked up from the 2026-09-10 index-layout port. All work is pushed and live. Working tree clean.

@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="headshot">
-            <img src="{{ site.profile_image | relative_url }}" alt="{{ site.name }}">
+            <img src="{{ site.profile_image | relative_url }}" alt="{{ site.name }}" fetchpriority="high" decoding="async">
         </div>
     </div>
 </section>

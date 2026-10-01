@@ -12,7 +12,7 @@ skills:
 - Design for Manufacturing
 - Field Deployment & Commissioning
 - Customer-Driven Iteration
-main-image: /Mortality7.jpeg
+main-image: /Mortality7.webp
 ---
 
-{% include image-gallery.html images="Mortality1.jpeg, Mortality2.jpeg, Mortality3.jpeg, Mortality5.jpeg, Mortality8.jpeg" height="340" %}
+{% include image-gallery.html images="Mortality1.webp, Mortality2.webp, Mortality3.webp, Mortality5.webp, Mortality8.webp" height="340" %}

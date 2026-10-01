@@ -17,7 +17,7 @@ skills:
 - Thermal Management
 - Pressure Vessel Design
 - Project Management
-main-image: /BiomassV2_6.jpeg
+main-image: /BiomassV2_6.webp
 ---
 
-{% include image-gallery.html images="BiomassV2_1.jpeg, BiomassV2_2.jpeg, BiomassV2_3.jpeg, BiomassV2_4.jpeg, BiomassV2_5.jpeg" height="340" %}
+{% include image-gallery.html images="BiomassV2_1.webp, BiomassV2_2.webp, BiomassV2_3.webp, BiomassV2_4.webp, BiomassV2_5.webp" height="340" %}

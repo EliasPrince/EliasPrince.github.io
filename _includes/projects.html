@@ -57,8 +57,12 @@
         {% for item in project_list %}
             {% if lead and item.url == lead.url %}{% continue %}{% endif %}
             {% assign folder_path = item.path | split: "/" | slice: 0, 2 | join: "/" %}
+            {% assign mi = item['main-image'] %}
+            {% assign mi_ext = mi | split: "." | last %}
+            {% assign mi_base = mi | split: "." | first %}
+            {% if mi_ext == "png" %}{% assign thumb_class = " render" %}{% else %}{% assign thumb_class = "" %}{% endif %}
             <a href="{{ item.url }}" class="row">
-                <img class="thumb" src="/{{ folder_path }}{{ item['main-image'] }}" alt="" loading="lazy">
+                <img class="thumb{{ thumb_class }}" src="/{{ folder_path }}{{ mi_base }}-thumb.webp" alt="" loading="lazy" decoding="async">
                 {% unless include.featured_only %}
                 <div class="year">{{ item.year }}</div>
                 {% endunless %}
