@@ -1,3 +1,33 @@
+# Session Notes — 2026-09-30 (later) — Biomass camera page
+
+Picked up right after the image-speed work below. **Live as of `ef381c6`.**
+
+## What shipped
+
+- **Camera project page written** (`_projects/Biomass-Camera-V2/index.md`) from Elias's own summary (kept in gitignored `PROJECT_NOTES.md`). Three short sections, ~230 words: Why it exists / What I did / Outcome, plus overview paragraph. `org: Innovasea` added to the meta strip. Tagline and overview say **launching Q4 2026** (not shipped). Skills list updated to match the summary.
+- **Two new photos** as captioned figures: `BMCV2_Annotated_Fish.webp` (full width, after "Why it exists") and `BMCV2_Prototype_Deployment.webp` (half width, in Outcome). Original JPEGs deleted at his request. Gallery trimmed to BiomassV2_1–3; files 4 and 5 deleted. Vendor label visible in the deployment photo: Elias said fine.
+- **Self-hosted video.** New `_includes/video.html` (captioned figure, native controls, `preload="metadata"`, poster). `BMCV2_Field_Trial.mp4` is 9 MB, 21 s, 1080p H.264 at 3.5 Mbps, **audio stripped**, fast-start (moov first). Poster is a frame pulled from the clip. He did not want YouTube. The 27 MB original MOV was deleted.
+- CSS: `.fig video` and a `.fig.fig-half` rule so a lone `width="half"` figure works outside `.fig-grid`.
+
+## Writing guidance from Elias (applies to every project page)
+
+- **Short and sweet.** Quick read: a few images, a summary of the product, what he did, the outcome. Not a datasheet, not a presentation. Single-incident engineering stories (one window failure, one seal resize) are too specific.
+- **Framing: showing the work to engineering friends**, not selling himself to recruiters. Cut pitch phrases ("changes that math", "came full circle", "I own the full scope").
+- **But keep the polish.** When the prose got too plain he said it was "a slight bit too simple" — aim for well-crafted sentences, not stripped-down ones.
+- Scope words: "aquaculture net pens" / "fish farms", never "salmon pens" (they serve multiple species). "High-power compute" rather than naming the GPU. Mechanical effort spans structural, thermal, optical, sealing, aesthetics, manufacturing — don't single out sealing.
+- Exclusions confirmed by Elias: customer and site names, competitor observation, specific torques, dimensions, part numbers, vendor names, internal report IDs. Teammate names also left out.
+
+## Video pipeline notes
+
+No ffmpeg. `avconvert` presets can't set bitrate. Used a small Swift AVAssetWriter transcoder (bitrate + size control), AVAssetExportSession passthrough with `shouldOptimizeForNetworkUse` to drop audio and fast-start without re-encoding, and AVAssetImageGenerator for the poster. Scripts lived in the session scratchpad; trivial to rewrite. Python's `http.server` has no Range support, so test video through `jekyll serve` (WEBrick). Chrome defers media loading in hidden tabs, so the extension can't verify playback — Elias to confirm on the live page.
+
+## Open
+
+- Remaining project pages: Navy FEA, net pens, mortality system, power supply enclosure. All need Elias's source material first.
+- About caption location, private-repo question.
+
+---
+
 # Session Notes — 2026-09-30 — Image loading speed
 
 Elias noticed the About photo loading slowly. Audit found three causes: every photo was a 1600px JPEG at 300KB–1.1MB, the project index rows were pulling each project's full-size main image for a 168px thumbnail (~3.3MB on `/projects/`), and the About photo had `loading="lazy"` even though it sits above the fold.
