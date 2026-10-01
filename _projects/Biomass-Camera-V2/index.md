@@ -36,6 +36,8 @@ I lead the mechanical design of the camera, from concept through launch. At its 
 
 A newly formed cross-functional team took the product from definition to commercial launch in just over a year. I field-tested two prototypes at commercial farms alongside the current camera, and the full chain worked end to end: into the pen, video captured, detection on board, results in the cloud, with no leaks and no mechanical failures.
 
+{% include video.html src="BMCV2_Field_Trial.mp4" poster="BMCV2_Field_Trial-poster.webp" caption="Field trials of the V2 prototypes." %}
+
 {% include figure.html src="BMCV2_Prototype_Deployment.webp" caption="Two V2 prototypes on a pen deck during field trials." width="half" %}
 
 {% include image-gallery.html images="BiomassV2_1.webp, BiomassV2_2.webp, BiomassV2_3.webp" height="340" %}

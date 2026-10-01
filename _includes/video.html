@@ -1,0 +1,12 @@
+{% comment %}
+  Captioned, self-hosted video for project pages. Usage inside a project's markdown:
+    {% include video.html src="Clip.mp4" poster="Clip-poster.webp" caption="What the clip shows." %}
+  Paths are relative to the project's folder. Nothing downloads until the viewer presses play.
+{% endcomment %}
+{% assign vid_folder = page.path | split: "/" | slice: 0, 2 | join: "/" %}
+<figure class="fig fig-video{% if include.width %} fig-{{ include.width }}{% endif %}">
+    <video controls preload="metadata" playsinline{% if include.poster %} poster="/{{ vid_folder }}/{{ include.poster }}"{% endif %}>
+        <source src="/{{ vid_folder }}/{{ include.src }}" type="video/mp4">
+    </video>
+    {% if include.caption %}<figcaption>{{ include.caption }}</figcaption>{% endif %}
+</figure>

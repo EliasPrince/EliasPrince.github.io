@@ -870,6 +870,13 @@ footer .license {
     margin: 0 auto;
 }
 
+.fig video {
+    display: block;
+    width: 100%;
+    height: auto;
+    background: #000;
+}
+
 /* A lone half-width figure (figure.html width="half" outside a .fig-grid) */
 .fig.fig-half {
     max-width: calc(50% - 12px);
